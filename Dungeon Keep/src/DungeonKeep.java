@@ -41,6 +41,7 @@ public class DungeonKeep {
 	public static int evalMove(char move, char[][] map, int[]pos, int[]guardPos, char[]currentPos)
 	{
 		heroMove(move, map, pos, currentPos);
+		guardMove(map, guardPos);
 		return evalStatus(move, map, pos, guardPos);
 	}
 	
@@ -118,7 +119,47 @@ public class DungeonKeep {
 		}
 		}
 	}
-
+	
+	public static void guardMove(char[][] map, int[]guardPos) 
+	{
+		map[guardPos[0]][guardPos[1]] = ' ';
+		
+		if( guardPos[0] == 1 && guardPos[1] == 7)
+		{
+			guardPos[0]++;			
+		}
+		else if(guardPos[1] == 8 && guardPos[0] <= 6 && guardPos[0] > 1)
+		{
+			guardPos[0]--;
+		}
+		else if(guardPos[0] == 1)
+		{
+			guardPos[1]--;
+		}
+		else if(guardPos[0] == 6)
+		{
+			guardPos[1]++;
+		}
+		else if(guardPos[1] == 1)
+		{
+			guardPos[0]++;
+		}
+		else if(guardPos[0] == 5)
+		{
+			guardPos[1]--;
+		}
+		else if(guardPos[1] == 7)
+		{
+			guardPos[0]++;
+		}
+		else
+		{
+			guardPos[1]++;
+		}
+		
+		map[guardPos[0]][guardPos[1]] = 'G';
+	}
+	
 	public static void main(String[] args)
 	{
 		char[][] mapInit = createMap();
