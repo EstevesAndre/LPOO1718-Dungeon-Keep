@@ -86,11 +86,34 @@ public class DungeonKeep {
 				break;
 		}
 		
-		printMap(mapInit);
-		if(victory == 1)
-			System.out.print("Victory!");
-		else
+		printMap(mapInit);		
+		if(victory == 2)
 			System.out.print("Game Over!");
+		else 
+		{
+			System.out.println("\n\n");
+			mapInit = Level2.createMap();
+			pos[0] = 7;
+			pos[1] = 1;
+			guardPos[0] = 1;
+			guardPos[1] = 4;
+			victory = 0;
+			while(true)
+			{
+				printMap(mapInit);
+				System.out.print("Select direction: (u)p, (d)own, (l)eft or (r)ight: ");
+				char move = reader.next().charAt(0);
+				victory = Level2.evalMove(move, mapInit, pos, guardPos, currentPos);
+				if(victory != 0)
+					break;
+			}
+			printMap(mapInit);		
+			if(victory == 2)
+				System.out.print("Game Over!");
+			else
+				System.out.print("Victory!");
+		}
+		
 		
 		reader.close();
 	}
