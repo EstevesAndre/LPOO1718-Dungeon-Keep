@@ -20,7 +20,7 @@ public class DungeonKeep {
 	{
 		switch(move)
 		{
-		case 'l':
+		case 'a':
 		{
 			if(map[pos[0]][pos[1]-1] != 'X' && map[pos[0]][pos[1]-1] != 'I') // if next position is not a wall or closed door
 			{
@@ -31,7 +31,7 @@ public class DungeonKeep {
 			}
 			break;
 		}
-		case 'r':
+		case 'd':
 		{
 			if(map[pos[0]][pos[1]+1] != 'X' && map[pos[0]][pos[1]+1] != 'I')
 			{
@@ -42,7 +42,7 @@ public class DungeonKeep {
 			}
 			break;
 		}
-		case 'u':
+		case 'w':
 		{
 			if(map[pos[0]-1][pos[1]] != 'X' && map[pos[0]-1][pos[1]] != 'I')
 			{
@@ -53,7 +53,7 @@ public class DungeonKeep {
 			}
 			break;
 		}
-		case 'd':
+		case 's':
 		{
 			if(map[pos[0]+1][pos[1]] != 'X' && map[pos[0]+1][pos[1]] != 'I')
 			{
@@ -79,7 +79,7 @@ public class DungeonKeep {
 		while(true)
 		{
 			printMap(mapInit);
-			System.out.print("Select direction: (u)p, (d)own, (l)eft or (r)ight: ");
+			System.out.print("Select direction -  [WASD]: ");
 			char move = reader.next().charAt(0);
 			victory = Level1.evalMove(move, mapInit, pos, guardPos, currentPos);
 			if(victory != 0)
@@ -101,7 +101,7 @@ public class DungeonKeep {
 			while(true)
 			{
 				printMap(mapInit);
-				System.out.print("Select direction: (u)p, (d)own, (l)eft or (r)ight: ");
+				System.out.print("Select direction -  [WASD]: ");
 				char move = reader.next().charAt(0);
 				victory = Level2.evalMove(move, mapInit, pos, guardPos, currentPos);
 				if(victory != 0)
