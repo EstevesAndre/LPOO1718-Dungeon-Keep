@@ -25,7 +25,7 @@ public class Level1 {
 	 */
 	public static int evalMove(char move, char[][] map, int[]pos, int[]guardPos, char[]currentPos)
 	{
-		DungeonKeep.heroMove(move, map, pos, currentPos);
+		heroMove(move, map, pos, currentPos);
 		if ((pos[0] == guardPos[0] && (pos[1] == guardPos[1] - 1 || pos[1] == guardPos[1] + 1)) || 
 				 (pos[1] == guardPos[1] && (pos[0] == guardPos[0] - 1 || pos[0] == guardPos[0] + 1))) //if next to guard
 		{
@@ -34,6 +34,58 @@ public class Level1 {
 		guardMove(map, guardPos);
 		return evalStatus(move, map, pos, guardPos);
 	}
+	
+	public static void heroMove(char move, char[][] map, int[]pos, char[]currentPos)
+	{
+		switch(move)
+		{
+		case 'a':
+		{
+			if(map[pos[0]][pos[1]-1] != 'X' && map[pos[0]][pos[1]-1] != 'I') // if next position is not a wall or closed door
+			{
+				map[pos[0]][pos[1]] = currentPos[0]; //clears current position
+				pos[1]--; //updates coordinates
+				currentPos[0] = map[pos[0]][pos[1]]; //saves current position
+				map[pos[0]][pos[1]] = 'H'; //moves hero
+			}
+			break;
+		}
+		case 'd':
+		{
+			if(map[pos[0]][pos[1]+1] != 'X' && map[pos[0]][pos[1]+1] != 'I')
+			{
+				map[pos[0]][pos[1]] = currentPos[0];
+				pos[1]++;
+				currentPos[0] = map[pos[0]][pos[1]]; //saves current position
+				map[pos[0]][pos[1]] = 'H';
+			}
+			break;
+		}
+		case 'w':
+		{
+			if(map[pos[0]-1][pos[1]] != 'X' && map[pos[0]-1][pos[1]] != 'I')
+			{
+				map[pos[0]][pos[1]] = currentPos[0];
+				pos[0]--;
+				currentPos[0] = map[pos[0]][pos[1]]; //saves current position
+				map[pos[0]][pos[1]] = 'H';
+			}
+			break;
+		}
+		case 's':
+		{
+			if(map[pos[0]+1][pos[1]] != 'X' && map[pos[0]+1][pos[1]] != 'I')
+			{
+				map[pos[0]][pos[1]] = currentPos[0];
+				pos[0]++;
+				currentPos[0] = map[pos[0]][pos[1]]; //saves current position
+				map[pos[0]][pos[1]] = 'H';
+			}
+			break;
+		}
+		}
+	}
+	
 	
 	public static int evalStatus(char move, char[][] map, int[]pos, int[]guardPos)
 	{
