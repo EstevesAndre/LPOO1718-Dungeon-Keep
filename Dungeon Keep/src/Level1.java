@@ -26,6 +26,11 @@ public class Level1 {
 	public static int evalMove(char move, char[][] map, int[]pos, int[]guardPos, char[]currentPos)
 	{
 		DungeonKeep.heroMove(move, map, pos, currentPos);
+		if ((pos[0] == guardPos[0] && (pos[1] == guardPos[1] - 1 || pos[1] == guardPos[1] + 1)) || 
+				 (pos[1] == guardPos[1] && (pos[0] == guardPos[0] - 1 || pos[0] == guardPos[0] + 1))) //if next to guard
+		{
+			return 2;
+		}
 		guardMove(map, guardPos);
 		return evalStatus(move, map, pos, guardPos);
 	}
