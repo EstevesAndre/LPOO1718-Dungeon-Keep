@@ -24,7 +24,7 @@ public class DungeonKeep {
 		int victory; //victory status
 		Scanner reader = new Scanner(System.in);
 
-		/*while(true)
+		while(true)
 		{
 			printMap(mapInit);
 			System.out.print("Select direction -  [WASD]: ");
@@ -38,7 +38,7 @@ public class DungeonKeep {
 		if(victory == 2)
 			System.out.print("Game Over!");
 		else 
-		*/
+		
 		if(true)
 		{
 			System.out.println("\n\n");
@@ -47,13 +47,14 @@ public class DungeonKeep {
 			pos[1] = 1;
 			guardPos[0] = 1;
 			guardPos[1] = 4;
+			int[] swingPos = {1, 1}; //swing initial position - arbitrary
 			victory = 0;
 			while(true)
 			{
 				printMap(mapInit);
 				System.out.print("Select direction -  [WASD]: ");
 				char move = reader.next().charAt(0);
-				victory = Level2.evalMove(move, mapInit, pos, guardPos, currentPos);
+				victory = Level2.evalMove(move, mapInit, pos, guardPos, swingPos, currentPos);
 				if(victory != 0)
 					break;
 			}
