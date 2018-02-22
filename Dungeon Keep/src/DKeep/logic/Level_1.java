@@ -27,7 +27,7 @@ public class Level_1 {
 	
 	public static Guard createGuard()
 	{
-		Guard g = new Guard(8, 1);
+		Guard g = new Rookie(8, 1);
 		return g;
 	}
 	
@@ -45,7 +45,7 @@ public class Level_1 {
 			return 2;
 		}
 		
-		g.guardMove(map);
+		g.move(map);
 		
 		if(h.getX() == 0 && (h.getY() == 5 || h.getY() == 6)) // if is at exit doors
 		{

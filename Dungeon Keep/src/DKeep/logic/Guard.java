@@ -7,7 +7,8 @@ public class Guard extends Character{
 		super(x, y);
 	}
 	
-	public void guardMove(char[][] map) 
+	
+	public void move(char[][] map) 
 	{
 		map[yPos][xPos] = ' ';
 		
