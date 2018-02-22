@@ -1,67 +1,94 @@
 package DKeep.logic;
 
+import java.util.Random;
+
 public class Level_2 {
-	
+
 	public static char[][] createMap()
 	{
 		char[][] map = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, // size 9v9
-				{'I', ' ', ' ', ' ', '0', ' ', ' ', 'k', 'X'},
+				{'I', ' ', ' ', ' ', ' ', ' ', ' ', 'k', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-				{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', 'A', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'} };
 
 		return map;
 
 	}
-	
+
 	public static Hero createHero()
 	{
-		Hero h = new Hero(1, 7, ' ', 'H');
+		Hero h = new Hero(1, 7, ' ', 'A');
 		return h;
 	}
-	
+
 	public static Ogre createOgre()
 	{
-		Ogre o = new Ogre(4, 1);
+		boolean valid = true;
+		int x = 1, y = 1;
+
+		do
+		{
+			Random nr = new Random();
+			x = nr.nextInt(7) + 1;
+			y = nr.nextInt(7) + 1;
+
+			if((y >= 5 && x <= 3) || (x == 7 && y == 1))
+			{
+				valid = false;
+			}
+
+		}while(!valid);
+
+		Ogre o = new Ogre(x, y);
 		return o;
 	}
-	
+
 	/*
 	 * return:
 	 * 0: no end game reached
 	 * 1: victory condition reached
 	 * 2: defeat condition reached
 	 */
-	public static int evalStatus(char[][] map, Hero h, Ogre o)
+	public static int evalStatus(char[][] map, Hero h, Ogre[] o)
 	{
-		if ((h.getY() == o.getY() && (h.getX() == o.getX() - 1 || h.getX() == o.getX() + 1)) || 
-				(h.getX() == o.getX() && (h.getY() == o.getY() - 1 || h.getY() == o.getY() + 1))) //if next to guard
+
+		for(Ogre x : o)
 		{
-			return 2;
+			x.move(map);
 		}
-		
-		o.move(map);
-		o.swing(map);
-		
+
+		for(Ogre x : o)
+		{
+			x.swing(map);
+		}
+
+		for(Ogre og : o) 
+		{
+			if((og.getX() - 1 == h.getX() && og.getY() == h.getY()) ||
+					(og.getX() + 1 == h.getX() && og.getY() == h.getY()) ||
+					(og.getX() == h.getX() && og.getY() - 1 == h.getY()) ||
+					(og.getX() == h.getX() && og.getY() + 1 == h.getY()))
+			{
+				og.stun(map);
+			}
+		}
+
 		if(h.getX() == 0 && h.getY() == 1) // at exit door
 		{
 			return 1;
 		}
-		
-		else if ((h.getY() == o.getY() && (h.getX() == o.getX() - 1 || h.getX() == o.getX() + 1)) || 
-				(h.getX() == o.getX() && (h.getY() == o.getY() - 1 || h.getY() == o.getY() + 1))) //if next to guard
-		{
-			return 2;
-		}
-		
+
 		else if (map[h.getY() + 1][h.getX()] == '*'
 				|| map[h.getY() - 1][h.getX()] == '*'
 				|| map[h.getY()][h.getX() + 1] == '*'
-				|| map[h.getY()][h.getX() - 1] == '*') //if next to lever
+				|| map[h.getY()][h.getX() - 1] == '*'
+				|| map[h.getY()][h.getX()] == '*')
+
 		{
 			return 2;
 		}

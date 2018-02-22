@@ -1,16 +1,19 @@
 package DKeep.logic;
 
+import java.util.Random;
+
 public class Game {
 
 	private char[][] map;
 	private Hero h;
 	private Guard g;
-	private Ogre o;
+	private Ogre[] o;
 	private int level;
+	private int nOgres;
 	
 	public Game()
 	{
-		startLevel1();
+		startLevel2();
 	}
 	
 	public void restartGame()
@@ -36,7 +39,18 @@ public class Game {
 		level = 2;
 		map = Level_2.createMap();
 		h = Level_2.createHero();
-		o = Level_2.createOgre();
+		
+		Random nr = new Random();
+		nOgres = nr.nextInt(4) + 1;
+		
+		o = new Ogre[nOgres];
+		
+		for(int i = 0; i < nOgres; i++)
+		{
+			o[i]  = Level_2.createOgre();
+			
+			map[ o[i].getY() ] [ o[i].getX() ] = '0';
+		}
 	}	
 	
 	public void heroMove(char m)
