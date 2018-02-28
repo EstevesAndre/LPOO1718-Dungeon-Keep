@@ -65,7 +65,7 @@ public class Hero extends Character{
 			break;
 		}
 		}
-		if(currentPos == 'k' && symbol == 'H')
+		if(currentPos == 'k' && symbol == 'A')
 		{
 			symbol = 'K';
 			currentPos = ' ';
