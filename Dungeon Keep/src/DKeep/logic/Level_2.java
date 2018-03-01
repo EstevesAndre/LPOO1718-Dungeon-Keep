@@ -33,6 +33,7 @@ public class Level_2 {
 
 		do
 		{
+			valid = true;
 			Random nr = new Random();
 			x = nr.nextInt(7) + 1;
 			y = nr.nextInt(7) + 1;
@@ -48,15 +49,9 @@ public class Level_2 {
 		return o;
 	}
 
-	/*
-	 * return:
-	 * 0: no end game reached
-	 * 1: victory condition reached
-	 * 2: defeat condition reached
-	 */
-	public static int evalStatus(char[][] map, Hero h, Ogre[] o)
+	
+	public static void ogreMove(char [][] map, Ogre[] o)
 	{
-
 		for(Ogre x : o)
 		{
 			x.move(map);
@@ -66,6 +61,16 @@ public class Level_2 {
 		{
 			x.swing(map);
 		}
+	}
+	
+	/*
+	 * return:
+	 * 0: no end game reached
+	 * 1: victory condition reached
+	 * 2: defeat condition reached
+	 */
+	public static int evalStatus(char[][] map, Hero h, Ogre[] o)
+	{
 
 		for(Ogre og : o) 
 		{

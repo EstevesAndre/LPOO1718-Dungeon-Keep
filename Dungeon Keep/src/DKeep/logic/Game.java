@@ -75,6 +75,7 @@ public class Game {
 		}
 		case 2:
 		{
+			Level_2.ogreMove(map, o);
 			return Level_2.evalStatus(map, h, o);
 		}
 		default:
@@ -102,6 +103,11 @@ public class Game {
 	public Hero getHero()
 	{
 		return h;
+	}
+	
+	public Ogre[] getOgre()
+	{
+		return o;
 	}
 	
 	public void setHero(int x, int y)
