@@ -1,16 +1,17 @@
 package DKeep.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import DKeep.logic.Game;
 import DKeep.logic.Level_2;
 
-class TestDungeonGameLogic {
+public class TestDKLogic {
 
 	@Test
-	void testMoveHeroIntoToFreeCell() {
+	public void testMoveHeroIntoToFreeCell() {
 		Game g = new Game();
 		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
 		assertEquals(1, g.getHero().getX());
@@ -22,7 +23,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testMoveHeroIntoToWall() {
+	public void testMoveHeroIntoToWall() {
 		Game g = new Game();
 		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
 		assertEquals(1, g.getHero().getX());
@@ -34,7 +35,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testMoveHeroIntoToGuard() {
+	public void testMoveHeroIntoToGuard() {
 		Game g = new Game();
 		g.setHero(8, 3);
 		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
@@ -48,7 +49,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testMoveHeroIntoToClosedDoor() {
+	public void testMoveHeroIntoToClosedDoor() {
 		Game g = new Game();
 		g.setHero(1, 5);
 		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
@@ -62,7 +63,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testMoveHeroIntoToLever() {
+	public void testMoveHeroIntoToLever() {
 		Game g = new Game();
 		g.setHero(8, 8);
 		g.heroMove('a');
@@ -72,7 +73,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testMoveHeroIntoToOpenDoor() {
+	public void testMoveHeroIntoToOpenDoor() {
 		Game g = new Game();
 		g.setHero(8, 8);
 		g.heroMove('a');
@@ -89,7 +90,7 @@ class TestDungeonGameLogic {
 	}
 
 	@Test
-	void testStunOgre() {
+	 public void testStunOgre() {
 		Game g = new Game();
 		g.advanceLevel();
 		g.setOgre(3, 7);
@@ -100,7 +101,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testHeroRepresentationAtKeyCell() {
+	public void testHeroRepresentationAtKeyCell() {
 		Game g = new Game();
 		g.advanceLevel();
 		g.setOgre(7, 7);
@@ -112,7 +113,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testHeroFailsOpenTheDoor() {
+	public void testHeroFailsOpenTheDoor() {
 		Game g = new Game();
 		g.advanceLevel();
 		g.setOgre(7, 7);
@@ -126,7 +127,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testHeroOpensTheDoor() {
+	public void testHeroOpensTheDoor() {
 		Game g = new Game();
 		g.advanceLevel();
 		g.setOgre(7, 7);
@@ -142,7 +143,7 @@ class TestDungeonGameLogic {
 	}
 	
 	@Test
-	void testHeroWinsLevel() {
+	public void testHeroWinsLevel() {
 		Game g = new Game();
 		g.advanceLevel();
 		g.setOgre(7, 7);
@@ -156,19 +157,3 @@ class TestDungeonGameLogic {
 		assertEquals(1, g.evalStatus());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
