@@ -87,4 +87,60 @@ class TestDungeonGameLogic {
 		assertEquals(1, g.evalStatus());
 	}
 
+	
+	@Test
+	void testHeroRepresentationAtKeyCell() {
+		Game g = new Game();
+		g.advanceLevel();
+		g.setOgre(7, 7);
+		g.setHero(7, 2);
+		assertEquals('A', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		g.heroMove('w');
+		assertEquals('K', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		
+	}
+	
+	@Test
+	void testHeroFailsOpenTheDoor() {
+		Game g = new Game();
+		g.advanceLevel();
+		g.setOgre(7, 7);
+		g.setHero(1, 1);
+		assertEquals('A', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		g.heroMove('a');
+		assertEquals(1, g.getHero().getX());
+		assertEquals(1, g.getHero().getY());
+		assertEquals('I', g.getMap()[1][0]);
+		
+	}
+	
+	@Test
+	void testHeroOpensTheDoor() {
+		Game g = new Game();
+		g.advanceLevel();
+		g.setOgre(7, 7);
+		g.setHero(1, 1);
+		assertEquals('A', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		g.heroMove('a');
+		assertEquals(1, g.getHero().getX());
+		assertEquals(1, g.getHero().getY());
+		assertEquals('I', g.getMap()[1][0]);
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

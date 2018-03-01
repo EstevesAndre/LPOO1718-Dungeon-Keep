@@ -12,6 +12,17 @@ public class Hero extends Character{
 		symbol = sym;
 	}
 
+	public char getCurrentPos()
+	{
+		return currentPos;
+	}
+	
+	public char getSymbol()
+	{
+		return symbol;
+	}
+	
+	
 	public void move(char m, char[][] map)
 	{
 		switch(m)

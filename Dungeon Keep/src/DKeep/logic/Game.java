@@ -106,8 +106,18 @@ public class Game {
 	
 	public void setHero(int x, int y)
 	{
-		map[h.getY()][h.getX()] = ' ';
+		map[h.getY()][h.getX()] = h.getCurrentPos();
 		h.setPos(x, y);
-		map[h.getY()][h.getX()] = 'H';
+		map[h.getY()][h.getX()] = h.getSymbol();
+	}
+	
+	public void setOgre(int x, int y)
+	{
+		for(Ogre ogre : o)
+		{
+			map[ogre.getY()][ogre.getX()] = ' ';
+			ogre.setPos(x, y);
+			map[ogre.getY()][ogre.getX()] = ogre.getSymbol();
+		}
 	}
 }

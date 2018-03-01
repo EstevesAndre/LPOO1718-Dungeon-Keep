@@ -18,6 +18,17 @@ public class Ogre extends Character{
 		sleepCount = 0;
 	}
 
+	public char getSymbol()
+	{
+		return symbol;
+	}
+	
+	public int getSleepCount()
+	{
+		return sleepCount;
+	}
+	
+	
 	public void move( char[][] map)
 	{
 		if(sleepCount == 0)
