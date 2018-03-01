@@ -55,8 +55,11 @@ public class Level_2 {
 		for(Ogre x : o)
 		{
 			x.move(map);
-		}
-
+		}	
+	}
+	
+	public static void swingMove(char [][] map, Ogre[] o)
+	{
 		for(Ogre x : o)
 		{
 			x.swing(map);

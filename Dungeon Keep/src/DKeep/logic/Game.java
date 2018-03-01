@@ -76,6 +76,7 @@ public class Game {
 		case 2:
 		{
 			Level_2.ogreMove(map, o);
+			Level_2.swingMove(map,o);
 			return Level_2.evalStatus(map, h, o);
 		}
 		default:
