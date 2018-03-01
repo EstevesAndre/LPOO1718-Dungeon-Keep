@@ -13,7 +13,7 @@ public class Game {
 	
 	public Game()
 	{
-		startLevel2();
+		startLevel1();
 	}
 	
 	public void restartGame()
@@ -84,6 +84,11 @@ public class Game {
 		}
 	}
 	
+	public void setMap(char[][] map)
+	{
+		this.map = map;
+	}
+	
 	public char[][] getMap()
 	{
 		return map;
@@ -92,5 +97,17 @@ public class Game {
 	public int getLevel()
 	{
 		return level;
+	}
+	
+	public Hero getHero()
+	{
+		return h;
+	}
+	
+	public void setHero(int x, int y)
+	{
+		map[h.getY()][h.getX()] = ' ';
+		h.setPos(x, y);
+		map[h.getY()][h.getX()] = 'H';
 	}
 }

@@ -20,4 +20,10 @@ public class Character {
 	{
 		return yPos;
 	}
+	
+	public void setPos(int x, int y)
+	{
+		xPos = x;
+		yPos = y;
+	}
 }
