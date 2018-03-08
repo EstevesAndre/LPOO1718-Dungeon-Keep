@@ -16,6 +16,11 @@ public class Game {
 		startLevel1();
 	}
 	
+	public Game(String personality)
+	{
+		startLevel1(personality);
+	}
+	
 	public void restartGame()
 	{
 		startLevel1();
@@ -26,12 +31,25 @@ public class Game {
 		startLevel2();
 	}
 	
+	public void advanceLevel(int numberOgres)
+	{
+		startLevel2(numberOgres);
+	}
+	
 	private void startLevel1()
 	{
 		level = 1;
 		map = Level_1.createMap();
 		h = Level_1.createHero();
 		g = Level_1.createGuard();
+	}
+	
+	private void startLevel1(String personality)
+	{
+		level = 1;
+		map = Level_1.createMap();
+		h = Level_1.createHero();
+		g = Level_1.createGuard(personality);
 	}
 	
 	private void startLevel2()
@@ -52,6 +70,23 @@ public class Game {
 			map[ o[i].getY() ] [ o[i].getX() ] = '0';
 		}
 	}	
+	
+	private void startLevel2(int numberOgres)
+	{
+		level = 2;
+		map = Level_2.createMap();
+		h = Level_2.createHero();
+		
+		o = new Ogre[numberOgres];
+		
+		for(int i = 0; i < numberOgres; i++)
+		{
+			o[i]  = Level_2.createOgre();
+			
+			map[ o[i].getY() ] [ o[i].getX() ] = '0';
+		}
+	}	
+	
 	
 	public void heroMove(char m)
 	{
