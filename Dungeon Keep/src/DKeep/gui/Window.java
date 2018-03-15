@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import DKeep.logic.Game;
@@ -77,13 +78,11 @@ public class Window {
 		
 		String[] difficultLevels = {"Novice", "Intermediate", "Advanced"};
 		
-		JComboBox cmbPersonality = new JComboBox(difficultLevels);
+		JComboBox<Object> cmbPersonality = new JComboBox<Object>(difficultLevels);
 		cmbPersonality.setBounds(182, 78, 100, 22);
 		frmDungeonKeep.getContentPane().add(cmbPersonality);
 		
-		JTextArea gameScreen = new JTextArea();
-		gameScreen.setFont(new Font("Courier New", Font.PLAIN, 27));
-		gameScreen.setEditable(false);
+		Map gameScreen = new Map();
 		gameScreen.setBounds(45, 124, 505, 323);
 		frmDungeonKeep.getContentPane().add(gameScreen);
 		
@@ -120,7 +119,7 @@ public class Window {
 						btnRight.setEnabled(false);
 					}					
 				}
-				gameScreen.setText(printMap(game.getMap()));
+				gameScreen.setMap(game.getMap());
 				frmDungeonKeep.repaint();
 			}
 		});
@@ -157,7 +156,7 @@ public class Window {
 						btnRight.setEnabled(false);
 					}					
 				}
-				gameScreen.setText(printMap(game.getMap()));
+				gameScreen.setMap(game.getMap());
 				frmDungeonKeep.repaint();
 			}
 		});
@@ -194,7 +193,7 @@ public class Window {
 						btnRight.setEnabled(false);
 					}					
 				}
-				gameScreen.setText(printMap(game.getMap()));
+				gameScreen.setMap(game.getMap());
 				frmDungeonKeep.repaint();
 			}
 		});
@@ -231,7 +230,7 @@ public class Window {
 						btnRight.setEnabled(false);
 					}					
 				}
-				gameScreen.setText(printMap(game.getMap()));
+				gameScreen.setMap(game.getMap());
 				frmDungeonKeep.repaint();
 			}
 		});
@@ -271,8 +270,8 @@ public class Window {
 				btnDown.setEnabled(true);
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
-				
-				gameScreen.setText(printMap(game.getMap()));
+
+				gameScreen.setMap(game.getMap());
 				frmDungeonKeep.repaint();
 			}
 		});
