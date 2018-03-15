@@ -113,7 +113,7 @@ public class Window {
 		});
 		frmDungeonKeep.setResizable(false);
 		frmDungeonKeep.setTitle("Dungeon Keep");
-		frmDungeonKeep.setBounds(100, 100, 763, 548);
+		frmDungeonKeep.setBounds(100, 100, 491, 548);
 		frmDungeonKeep.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDungeonKeep.getContentPane().setLayout(null);
 
@@ -152,7 +152,7 @@ public class Window {
 		cmbPersonality.setBounds(182, 78, 100, 22);
 		frmDungeonKeep.getContentPane().add(cmbPersonality);
 
-		gameScreen.setBounds(45, 124, 505, 323);
+		gameScreen.setBounds(72, 124, 336, 323);
 		frmDungeonKeep.getContentPane().add(gameScreen);
 
 
@@ -164,7 +164,7 @@ public class Window {
 			}
 		});
 
-		btnExit.setBounds(607, 422, 97, 25);
+		btnExit.setBounds(340, 77, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnExit);
 
 		JButton btnNewGame = new JButton("New Game");
@@ -181,7 +181,7 @@ public class Window {
 				frmDungeonKeep.requestFocusInWindow();
 			}
 		});
-		btnNewGame.setBounds(607, 123, 97, 25);
+		btnNewGame.setBounds(340, 40, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnNewGame);
 
 	}
