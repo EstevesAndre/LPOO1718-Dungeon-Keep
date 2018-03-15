@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import DKeep.logic.Game;
+import DKeep.logic.Hero;
+import DKeep.logic.Ogre;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -25,6 +27,7 @@ public class Window {
 	private Game game;
 	private int nOgres;
 	private boolean playing;
+	private boolean custom;
 
 	/**
 	 * Launch the application.
@@ -56,6 +59,10 @@ public class Window {
 		JLabel lblMessage = new JLabel("Start a new game");;
 		Map gameScreen = new Map();
 		playing = false;
+		custom = false;
+		
+		Options op = new Options();
+		op.setVisible(false);
 
 		frmDungeonKeep = new JFrame();
 		frmDungeonKeep.addKeyListener(new KeyAdapter() {
@@ -98,7 +105,12 @@ public class Window {
 				{
 					if(game.getLevel() == 1)
 					{
-						game.advanceLevel(nOgres);
+						if(custom)
+						{
+							game.advanceLevel(nOgres, op.map.clone());
+						}
+						else
+							game.advanceLevel(nOgres);
 					}
 					else
 					{
@@ -164,16 +176,84 @@ public class Window {
 			}
 		});
 
-		btnExit.setBounds(340, 77, 97, 25);
+		btnExit.setBounds(340, 469, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnExit);
-
+		
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
-				
+				int cntHero = 0, cntKey = 0, cntOgre = 0, xHero = 0, yHero = 0;
 				
 				nOgres = Integer.parseInt((String)cmbOgres.getSelectedItem());
-
+				
+				if(!op.rdbtnRandom.isSelected())
+				{
+					for(int i = 0; i < op.map.length; i++)
+					{
+						for(int j = 0; j < op.map[i].length; j++)
+						{
+							switch(op.map[i][j])
+							{
+							case ' ':
+							{
+								break;
+							}
+							case 'X':
+							{
+								break;
+							}
+							case 'A':
+							{
+								cntHero++;
+								xHero = j;
+								yHero = i;
+								break;
+							}
+							case '0':
+							{
+								cntOgre++;
+								break;
+							}
+							case 'k':
+							{
+								cntKey++;
+								break;
+							}
+							}
+						}
+					}
+					if(cntHero != 1)
+					{
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Hero", "Error", 0);
+						return;
+					}
+					
+					if(cntKey != 1)
+					{
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Key", "Error", 0);
+						return;
+					}
+					
+					if(cntOgre != nOgres)
+					{
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Different number of Ogres than specified", "Error", 0);
+						return;
+					}
+					
+					if(op.map[yHero+1][xHero] == '0' || op.map[yHero-1][xHero] == '0' || op.map[yHero][xHero+1] == '0' || op.map[yHero][xHero-1] == '0')
+					{
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Hero next to an Ogre", "Error", 0);
+						return;
+					}
+				}
+				
+				
+				
+				
+				if(op.rdbtnRandom.isSelected())
+					custom = false;
+				else
+					custom = true;
 				game = new Game((String) cmbPersonality.getSelectedItem());
 				playing = true;
 				gameScreen.setMap(game.getMap());
@@ -183,6 +263,17 @@ public class Window {
 		});
 		btnNewGame.setBounds(340, 40, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnNewGame);
+		
+		
+		
+		JButton btnOptions = new JButton("Options");
+		btnOptions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				op.setVisible(true);
+			}
+		});
+		btnOptions.setBounds(340, 78, 97, 25);
+		frmDungeonKeep.getContentPane().add(btnOptions);
 
 	}
 

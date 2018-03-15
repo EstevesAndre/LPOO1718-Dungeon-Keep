@@ -26,7 +26,7 @@ public class Level_2 {
 		return h;
 	}
 
-	public static Ogre createOgre()
+	public static Ogre createOgre(char[][]map)
 	{
 		boolean valid = true;
 		int x = 1, y = 1;
@@ -45,7 +45,7 @@ public class Level_2 {
 
 		}while(!valid);
 
-		Ogre o = new Ogre(x, y);
+		Ogre o = new Ogre(x, y, map);
 		return o;
 	}
 

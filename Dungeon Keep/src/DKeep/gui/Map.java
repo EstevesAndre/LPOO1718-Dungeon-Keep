@@ -14,7 +14,6 @@ public class Map extends JPanel{
 	char[][] map;
 	
 	public Map() {
-		// TODO Auto-generated constructor stub
 		super();
 		map = null;
 	}
@@ -32,9 +31,9 @@ public class Map extends JPanel{
 		if(map == null)
 			return;
 		
-		for(int i = 0; i < map.length; i++)
+		for(int j = 0; j < map.length; j++)
 		{
-			for(int j = 0; j < map[i].length; j++)
+			for(int i = 0; i < map[j].length; i++)
 			{
 				if(map[j][i] == 'X')
 				{

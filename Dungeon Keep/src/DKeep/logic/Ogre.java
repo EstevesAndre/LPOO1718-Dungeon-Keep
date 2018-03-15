@@ -8,14 +8,16 @@ public class Ogre extends Character{
 	private int ySwingPos;
 	private char symbol; 
 	private int sleepCount;
+	private char[][] m;
 
-	public Ogre(int x, int y)
+	public Ogre(int x, int y, char[][] m)
 	{
 		super(x, y);
 		xSwingPos = 1;
 		ySwingPos = 1;
 		symbol = '0';
 		sleepCount = 0;
+		this.m = m;
 	}
 
 	public char getSymbol()
@@ -50,28 +52,28 @@ public class Ogre extends Character{
 				switch(num)
 				{
 				case 0:
-					if(xPos != 7)
+					if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
 					{
 						xPos++;
 						muda_posicao = false;
 					}
 					break;
 				case 1:
-					if(xPos != 1)
+					if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
 					{
 						xPos--;
 						muda_posicao = false;
 					}
 					break;
 				case 2:
-					if(yPos != 1)
+					if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
 					{
 						yPos--;
 						muda_posicao = false;
 					}
 					break;
 				case 3:
-					if(yPos != 7)
+					if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
 					{
 						yPos++;
 						muda_posicao = false;
@@ -121,7 +123,7 @@ public class Ogre extends Character{
 			switch(num)
 			{
 			case 0:
-				if(xPos != 7)
+				if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
 				{
 					ySwingPos = yPos;
 					xSwingPos = xPos + 1;
@@ -129,7 +131,7 @@ public class Ogre extends Character{
 				}
 				break;
 			case 1:
-				if(xPos != 1)
+				if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
 				{
 					ySwingPos = yPos;
 					xSwingPos = xPos - 1;
@@ -137,7 +139,7 @@ public class Ogre extends Character{
 				}
 				break;
 			case 2:
-				if(yPos != 1)
+				if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
 				{
 					ySwingPos = yPos - 1;
 					xSwingPos = xPos;
@@ -145,7 +147,7 @@ public class Ogre extends Character{
 				}
 				break;
 			case 3:
-				if(yPos != 7)
+				if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
 				{
 					ySwingPos = yPos + 1;
 					xSwingPos = xPos;

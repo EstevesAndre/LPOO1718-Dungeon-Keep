@@ -36,6 +36,11 @@ public class Game {
 		startLevel2(numberOgres);
 	}
 	
+	public void advanceLevel(int numberOgres, char[][]map)
+	{
+		startLevel2(numberOgres, map);
+	}
+	
 	private void startLevel1()
 	{
 		level = 1;
@@ -65,7 +70,7 @@ public class Game {
 		
 		for(int i = 0; i < nOgres; i++)
 		{
-			o[i]  = Level_2.createOgre();
+			o[i]  = Level_2.createOgre(map);
 			
 			map[ o[i].getY() ] [ o[i].getX() ] = '0';
 		}
@@ -81,11 +86,48 @@ public class Game {
 		
 		for(int i = 0; i < numberOgres; i++)
 		{
-			o[i]  = Level_2.createOgre();
+			o[i]  = Level_2.createOgre(map);
 			
 			map[ o[i].getY() ] [ o[i].getX() ] = '0';
 		}
 	}	
+	
+	private void startLevel2(int numberOgres, char[][] map)
+	{
+		level = 2;
+		this.map = map;
+		o = new Ogre[numberOgres];
+		int pos = 0;
+		
+		for(int i = 0; i < map.length; i++)
+		{
+			for(int j = 0; j < map[i].length; j++)
+			{
+				switch(map[i][j])
+				{
+				case ' ':
+				{
+					break;
+				}
+				case 'X':
+				{
+					break;
+				}
+				case 'A':
+				{
+					h = new Hero(j, i, ' ', 'A');
+					break;
+				}
+				case '0':
+				{
+					o[pos] = new Ogre(j, i, map);
+					pos++;
+					break;
+				}
+				}
+			}
+		}
+	}
 	
 	
 	public void heroMove(char m)
