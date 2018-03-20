@@ -107,7 +107,12 @@ public class Window {
 					{
 						if(custom)
 						{
-							game.advanceLevel(nOgres, op.map.clone());
+							char[][] map_c = new char[op.map.length][op.map[0].length];
+							for(int i = 0; i < op.map.length; i++)
+							{
+								map_c[i] = op.map[i].clone();
+							}
+							game.advanceLevel(nOgres, map_c);
 						}
 						else
 							game.advanceLevel(nOgres);
