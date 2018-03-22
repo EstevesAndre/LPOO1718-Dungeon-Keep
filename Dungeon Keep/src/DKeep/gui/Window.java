@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import DKeep.logic.Game;
+import java.awt.Toolkit;
 
 public class Window {
 
@@ -58,6 +59,7 @@ public class Window {
 		op.setVisible(false);
 
 		frmDungeonKeep = new JFrame();
+		frmDungeonKeep.setIconImage(Toolkit.getDefaultToolkit().getImage(Window.class.getResource("/DungeonKeep_TORCH.png")));
 		frmDungeonKeep.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
