@@ -1,5 +1,8 @@
 package DKeep.logic;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Guard extends Character{
 	
 	public Guard(int x, int y)
@@ -46,6 +49,17 @@ public class Guard extends Character{
 		}
 		
 		map[yPos][xPos] = 'G';
+	}
+
+
+	public void saveGame(BufferedWriter writer) throws IOException {
+		try {
+			writer.write(this.xPos + "\n");
+			writer.write(this.yPos + "\n");
+		} catch (IOException e) {
+			throw new IOException();
+		}
+		
 	}
 
 }

@@ -178,6 +178,11 @@ public class Game {
 		return level;
 	}
 	
+	public Guard getGuard()
+	{
+		return g;
+	}
+	
 	public Hero getHero()
 	{
 		return h;
@@ -195,6 +200,18 @@ public class Game {
 		map[h.getY()][h.getX()] = h.getSymbol();
 	}
 	
+	public void setHero(int x, int y, char pos, char sym) {
+		h.setPos(x, y);
+		h.setCurrentPos(pos);
+		h.setSymbol(sym);
+		
+	}
+	
+	public void setGuard(Guard g)
+	{
+		this.g = g;
+	}
+	
 	public void setOgre(int x, int y)
 	{
 		for(Ogre ogre : o)
@@ -204,4 +221,11 @@ public class Game {
 			map[ogre.getY()][ogre.getX()] = ogre.getSymbol();
 		}
 	}
+
+	public void setOgre(Ogre[] ogres) {
+		o = ogres;
+		
+	}
+
+	
 }

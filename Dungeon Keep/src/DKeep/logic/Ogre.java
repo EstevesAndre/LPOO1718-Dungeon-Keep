@@ -1,5 +1,7 @@
 package DKeep.logic;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Ogre extends Character{
@@ -11,6 +13,16 @@ public class Ogre extends Character{
 	private char[][] m;
 
 	public Ogre(int x, int y, char[][] m)
+	{
+		super(x, y);
+		xSwingPos = 1;
+		ySwingPos = 1;
+		symbol = '0';
+		sleepCount = 0;
+		this.m = m;
+	}
+	
+	public Ogre(int x, int y, int xS, int yS, char sym, int sleep, char[][] m)
 	{
 		super(x, y);
 		xSwingPos = 1;
@@ -172,5 +184,19 @@ public class Ogre extends Character{
 		symbol = '8';
 		map[yPos][xPos] = symbol;
 		sleepCount = 2;
+	}
+	
+	public void saveGame(BufferedWriter writer) throws IOException {
+		try {
+			writer.write(this.xPos + "\n");
+			writer.write(this.yPos + "\n");
+			writer.write(this.xSwingPos + "\n");
+			writer.write(this.ySwingPos + "\n");
+			writer.write(this.symbol + "\n");
+			writer.write(this.sleepCount + "\n");
+		} catch (IOException e) {
+			throw new IOException();
+		}
+		
 	}
 }

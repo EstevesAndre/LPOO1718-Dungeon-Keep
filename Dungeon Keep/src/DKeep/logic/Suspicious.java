@@ -1,5 +1,7 @@
 package DKeep.logic;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Suspicious extends Guard {
@@ -19,6 +21,13 @@ public class Suspicious extends Guard {
 		direction = true;
 		modifier = (float)1/3;
 		indice = 0;
+	}
+
+	public Suspicious(int x, int y, boolean dir, float mod, int ind) {
+		super(x,y);
+		direction = dir;
+		modifier = mod;
+		indice = ind;
 	}
 
 	public void move(char[][] map) 
@@ -110,5 +119,17 @@ public class Suspicious extends Guard {
 		{
 			modifier += (float)1/3;
 		}
+	}
+	
+	public void saveGame(BufferedWriter writer) throws IOException {
+		try {
+			super.saveGame(writer);
+			writer.write(this.direction + "\n");
+			writer.write(this.modifier + "\n");
+			writer.write(this.indice + "\n");
+		} catch (IOException e) {
+			throw new IOException();
+		}
+		
 	}
 }

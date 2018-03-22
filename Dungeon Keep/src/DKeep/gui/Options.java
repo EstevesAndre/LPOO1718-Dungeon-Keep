@@ -1,23 +1,24 @@
 package DKeep.gui;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
-import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
 
 public class Options extends JDialog {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textField;
 	private JTextField textField_1;
 	public JRadioButton rdbtnRandom;
+	public JComboBox<Object> comboBox;
+	public JComboBox<Object> comboBox_1;
 	public char[][] map;
 
 	/**
@@ -49,8 +50,8 @@ public class Options extends JDialog {
 
 
 		String[] vals = {"5", "6", "7", "8"};
-		JComboBox<Object> comboBox = new JComboBox<Object>(vals);
-		JComboBox<Object> comboBox_1 = new JComboBox<Object>(vals);
+		comboBox = new JComboBox<Object>(vals);
+		comboBox_1 = new JComboBox<Object>(vals);
 		
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

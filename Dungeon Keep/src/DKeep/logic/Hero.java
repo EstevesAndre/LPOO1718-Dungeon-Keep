@@ -1,5 +1,8 @@
 package DKeep.logic;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Hero extends Character{
 
 	private char currentPos;
@@ -20,6 +23,16 @@ public class Hero extends Character{
 	public char getSymbol()
 	{
 		return symbol;
+	}
+	
+	public void setCurrentPos(char pos)
+	{
+		currentPos = pos;
+	}
+	
+	public void setSymbol(char sym)
+	{
+		symbol = sym;
 	}
 	
 	
@@ -82,5 +95,17 @@ public class Hero extends Character{
 			currentPos = ' ';
 			map[yPos][xPos] = symbol;
 		}
+	}
+
+	public void saveGame(BufferedWriter writer) throws IOException {
+		try {
+			writer.write(this.xPos + "\n");
+			writer.write(this.yPos + "\n");
+			writer.write(this.currentPos + "\n");
+			writer.write(this.symbol + "\n");
+		} catch (IOException e) {
+			throw new IOException();
+		}
+		
 	}
 }

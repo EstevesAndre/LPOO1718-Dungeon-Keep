@@ -1,19 +1,30 @@
 package DKeep.gui;
 
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import DKeep.logic.Drunken;
 import DKeep.logic.Game;
-import java.awt.Toolkit;
+import DKeep.logic.Ogre;
+import DKeep.logic.Rookie;
+import DKeep.logic.Suspicious;
 
 public class Window {
 
@@ -63,6 +74,7 @@ public class Window {
 		frmDungeonKeep.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
+				
 				if(!playing)
 					return;
 				
@@ -130,7 +142,7 @@ public class Window {
 		frmDungeonKeep.getContentPane().setLayout(null);
 
 
-		lblMessage.setBounds(44, 473, 116, 16);
+		lblMessage.setBounds(44, 473, 105, 16);
 		frmDungeonKeep.getContentPane().add(lblMessage);
 
 		JLabel lblNumberOfOgres = new JLabel("Number of Ogres");
@@ -176,7 +188,7 @@ public class Window {
 			}
 		});
 
-		btnExit.setBounds(340, 469, 97, 25);
+		btnExit.setBounds(366, 469, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnExit);
 		
 		JButton btnNewGame = new JButton("New Game");
@@ -274,8 +286,206 @@ public class Window {
 		});
 		btnOptions.setBounds(340, 78, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnOptions);
+		
+		final JFileChooser fc = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Dungeon Keep Save Files (*.dks)", "dks");
+		fc.addChoosableFileFilter(filter);
+		fc. setAcceptAllFileFilterUsed(false);
+		
+		JButton mntmSaveGame = new JButton("Save");
+		mntmSaveGame.setBounds(159, 469, 97, 25);
+		mntmSaveGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmDungeonKeep.requestFocusInWindow();
+				int returnVal = fc.showSaveDialog(frmDungeonKeep);
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+
+					String file_name = file.toString();
+					if (!file_name.endsWith(".dks"))
+						file_name += ".dks";
+
+					File file_2 = new File(file_name);
+
+
+					if(file.exists() || file_2.exists())
+					{
+						if(JOptionPane.showConfirmDialog(frmDungeonKeep, "Overwrite file?") == 0)
+							file.delete();
+						else
+							return;
+
+					}
+
+
+					try 
+					{
+						BufferedWriter writer = new BufferedWriter(new FileWriter(file_name));
+						writer.write(nOgres + "\n");
+						writer.write(playing + "\n");
+						writer.write(custom + "\n");
+						writer.write(op.map.length + "\n");
+						writer.write(op.map[0].length + "\n");
+						
+						
+						for(char[] line : op.map)
+						{
+							for (char c : line)
+							{
+								writer.write(c + "\n");
+							}
+						}
+						
+						writer.write(op.comboBox.getSelectedItem() + "\n");
+						writer.write(op.comboBox_1.getSelectedItem() + "\n");
+						
+						writer.write(cmbPersonality.getSelectedItem() + "\n");
+						
+						writer.write(game.getLevel() + "\n");
+						
+						game.getHero().saveGame(writer);
+						game.getGuard().saveGame(writer);
+						
+						writer.write(game.getMap().length + "\n");
+						writer.write(game.getMap().length + "\n");
+						
+						for(char[] line : game.getMap())
+						{
+							for (char c : line)
+							{
+								writer.write(c + "\n");
+							}
+						}
+						
+						if (game.getLevel() == 2)
+						{
+							for(Ogre o : game.getOgre())
+							{
+								o.saveGame(writer);
+							}
+						}
+						
+						writer.close();
+						
+					}
+					catch (Exception e1) {
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Can't save game state.");
+						frmDungeonKeep.requestFocusInWindow();
+					}
+				}
+			}
+		});
+		frmDungeonKeep.getContentPane().add(mntmSaveGame);
+		
+		JButton mntmLoadGame = new JButton("Load");
+		mntmLoadGame.setBounds(263, 469, 97, 25);
+		mntmLoadGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmDungeonKeep.requestFocusInWindow();
+				int returnVal = fc.showOpenDialog(frmDungeonKeep);
+
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+
+
+					try {
+							BufferedReader reader = new BufferedReader(new FileReader(file));
+							nOgres = Integer.parseInt(reader.readLine());
+							
+							if(reader.readLine().equals("true"))
+								playing = true;
+							else
+								playing = false;
+							
+							if(reader.readLine().equals("true"))
+								custom = true;
+							else
+								custom = false;
+							
+							op.map = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
+							
+							for(int i = 0; i < op.map.length; i++)
+							{
+								for (int j = 0; j < op.map[i].length; j++)
+								{
+									op.map[i][j] = reader.readLine().charAt(0);
+								}
+							}
+							
+							op.comboBox.setSelectedItem(reader.readLine());
+							op.comboBox_1.setSelectedItem(reader.readLine());
+							cmbPersonality.setSelectedItem(reader.readLine());
+							
+							game = new Game((String) cmbPersonality.getSelectedItem());
+							
+							if(Integer.parseInt(reader.readLine()) == 2)
+							{
+								game.advanceLevel();
+							}
+							
+							game.setHero(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), reader.readLine().charAt(0));
+							
+							if(cmbPersonality.getSelectedItem().equals("Novice"))
+							{
+								game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
+							}
+							else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
+							{
+								int x = Integer.parseInt(reader.readLine());
+								int y = Integer.parseInt(reader.readLine());
+								boolean direction;
+								
+								if(reader.readLine() == "true")
+									direction = true;
+								else
+									direction = false;
+								
+								game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine())));
+								
+							}
+							else
+							{
+								game.setGuard(new Suspicious(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Boolean.parseBoolean(reader.readLine()), Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine())));
+							}
+							
+							char[][] m = game.getMap();
+							m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
+							
+							for(int i = 0; i < m.length; i++)
+							{
+								for (int j = 0; j < m[i].length; j++)
+								{
+									m[i][j] = reader.readLine().charAt(0);
+								}
+							}
+							game.setMap(m);
+							
+							if (game.getLevel() == 2)
+							{
+								game.setOgre(new Ogre[nOgres]);
+								for(int i = 0; i < game.getOgre().length; i++)
+								{
+									game.getOgre()[i] = new Ogre(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine()), m);
+								}
+							}
+							
+							reader.close();
+							gameScreen.setMap(game.getMap());
+							frmDungeonKeep.repaint();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Invalid file format.");
+						frmDungeonKeep.requestFocusInWindow();
+					}
+
+				}
+			}
+		});
+		frmDungeonKeep.getContentPane().add(mntmLoadGame);
 
 	}
+	
+	
 
 	public String printMap(char [][] map)
 	{
