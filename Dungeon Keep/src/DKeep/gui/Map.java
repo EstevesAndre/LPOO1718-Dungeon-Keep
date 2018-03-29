@@ -121,7 +121,6 @@ public class Map extends JPanel{
 					g.fillRect(i*32, j*32, 32, 32);
 				}
 			}
-		}
-		
+		}		
 	}
 }

@@ -65,7 +65,7 @@ public class Window {
 		Map gameScreen = new Map();
 		playing = false;
 		custom = false;
-		
+
 		Options op = new Options();
 		op.setVisible(false);
 
@@ -74,11 +74,11 @@ public class Window {
 		frmDungeonKeep.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
+
 				if(!playing)
 					return;
-				
-				
+
+
 				int id = e.getKeyCode();
 				if(id == KeyEvent.VK_W)
 				{
@@ -159,7 +159,7 @@ public class Window {
 		});
 		cmbOgres.setBounds(182, 43, 100, 22);
 		frmDungeonKeep.getContentPane().add(cmbOgres);
-		
+
 
 		JLabel lblGuardPersonality = new JLabel("Guard personality");
 		lblGuardPersonality.setBounds(44, 81, 116, 16);
@@ -190,14 +190,14 @@ public class Window {
 
 		btnExit.setBounds(366, 469, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnExit);
-		
+
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
 				int cntHero = 0, cntKey = 0, cntOgre = 0, xHero = 0, yHero = 0;
-				
+
 				nOgres = Integer.parseInt((String)cmbOgres.getSelectedItem());
-				
+
 				if(!op.rdbtnRandom.isSelected())
 				{
 					for(int i = 0; i < op.map.length; i++)
@@ -239,29 +239,35 @@ public class Window {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Hero", "Error", 0);
 						return;
 					}
-					
+
 					if(cntKey != 1)
 					{
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Key", "Error", 0);
 						return;
 					}
-					
+
 					if(cntOgre != nOgres)
 					{
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Different number of Ogres than specified", "Error", 0);
 						return;
 					}
-					
+
 					if(op.map[yHero+1][xHero] == '0' || op.map[yHero-1][xHero] == '0' || op.map[yHero][xHero+1] == '0' || op.map[yHero][xHero-1] == '0')
 					{
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Hero next to an Ogre", "Error", 0);
 						return;
 					}
+
+					if(!isGamePossible(op.map, xHero, yHero))
+					{
+						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: The level is impossible", "Error", 0);
+						return;
+					}
 				}
-				
-				
-				
-				
+
+
+
+
 				if(op.rdbtnRandom.isSelected())
 					custom = false;
 				else
@@ -272,12 +278,68 @@ public class Window {
 				frmDungeonKeep.repaint();
 				frmDungeonKeep.requestFocusInWindow();
 			}
+
+			private boolean isGamePossible(char[][] map, int xHero, int yHero) {
+
+				boolean[][] visited = new boolean[map.length][map[0].length];
+				int[] xyKey = {0,0};
+				int[] xyDoor = {0,0};
+
+				return findGoal(map,visited,xHero,yHero,xyKey,xyDoor);
+			}
+
+			private boolean findGoal(char[][] map, boolean[][] visited, int x, int y, int[] xyKey, int[] xyDoor) {
+
+				visited[y][x] = true;
+
+				if(map[y][x] == 'k')
+				{					
+					xyKey[0] = x;
+					xyKey[1] = y;
+				}
+				if(map[y][x] == 'I')
+				{
+					xyDoor[0] = x;
+					xyDoor[1] = y;										
+				}
+
+				if(visited[xyKey[1]][xyKey[0]] && visited[xyDoor[1]][xyDoor[0]])
+				{
+					return true;
+				}
+
+				if(y-1 >= 0 && map[y-1][x] != 'X' && !visited[y-1][x])
+				{
+					if(findGoal(map,visited,x,y-1,xyKey,xyDoor))
+						return true;
+				}
+
+				if(map[y+1][x] != 'X' && !visited[y+1][x])
+				{
+					if(findGoal(map,visited,x,y+1,xyKey,xyDoor))
+						return true;
+				}
+
+				if(map[y][x+1] != 'X' && !visited[y][x+1])
+				{
+					if(findGoal(map,visited,x+1,y,xyKey,xyDoor))
+						return true;
+				}
+
+				if(x-1 >= 0 && map[y][x-1] != 'X' && !visited[y][x-1])
+				{
+					if(findGoal(map,visited,x-1,y,xyKey,xyDoor))
+						return true;
+				}
+
+				return false;
+			}
 		});
 		btnNewGame.setBounds(340, 40, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnNewGame);
-		
-		
-		
+
+
+
 		JButton btnOptions = new JButton("Options");
 		btnOptions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -286,12 +348,12 @@ public class Window {
 		});
 		btnOptions.setBounds(340, 78, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnOptions);
-		
+
 		final JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Dungeon Keep Save Files (*.dks)", "dks");
 		fc.addChoosableFileFilter(filter);
 		fc. setAcceptAllFileFilterUsed(false);
-		
+
 		JButton mntmSaveGame = new JButton("Save");
 		mntmSaveGame.setBounds(159, 469, 97, 25);
 		mntmSaveGame.addActionListener(new ActionListener() {
@@ -327,8 +389,8 @@ public class Window {
 						writer.write(custom + "\n");
 						writer.write(op.map.length + "\n");
 						writer.write(op.map[0].length + "\n");
-						
-						
+
+
 						for(char[] line : op.map)
 						{
 							for (char c : line)
@@ -336,20 +398,20 @@ public class Window {
 								writer.write(c + "\n");
 							}
 						}
-						
+
 						writer.write(op.comboBox.getSelectedItem() + "\n");
 						writer.write(op.comboBox_1.getSelectedItem() + "\n");
-						
+
 						writer.write(cmbPersonality.getSelectedItem() + "\n");
-						
+
 						writer.write(game.getLevel() + "\n");
-						
+
 						game.getHero().saveGame(writer);
 						game.getGuard().saveGame(writer);
-						
+
 						writer.write(game.getMap().length + "\n");
 						writer.write(game.getMap().length + "\n");
-						
+
 						for(char[] line : game.getMap())
 						{
 							for (char c : line)
@@ -357,7 +419,7 @@ public class Window {
 								writer.write(c + "\n");
 							}
 						}
-						
+
 						if (game.getLevel() == 2)
 						{
 							for(Ogre o : game.getOgre())
@@ -365,9 +427,9 @@ public class Window {
 								o.saveGame(writer);
 							}
 						}
-						
+
 						writer.close();
-						
+
 					}
 					catch (Exception e1) {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Can't save game state.");
@@ -377,7 +439,7 @@ public class Window {
 			}
 		});
 		frmDungeonKeep.getContentPane().add(mntmSaveGame);
-		
+
 		JButton mntmLoadGame = new JButton("Load");
 		mntmLoadGame.setBounds(263, 469, 97, 25);
 		mntmLoadGame.addActionListener(new ActionListener() {
@@ -390,89 +452,89 @@ public class Window {
 
 
 					try {
-							BufferedReader reader = new BufferedReader(new FileReader(file));
-							nOgres = Integer.parseInt(reader.readLine());
-							
-							if(reader.readLine().equals("true"))
-								playing = true;
+						BufferedReader reader = new BufferedReader(new FileReader(file));
+						nOgres = Integer.parseInt(reader.readLine());
+
+						if(reader.readLine().equals("true"))
+							playing = true;
+						else
+							playing = false;
+
+						if(reader.readLine().equals("true"))
+							custom = true;
+						else
+							custom = false;
+
+						op.map = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
+
+						for(int i = 0; i < op.map.length; i++)
+						{
+							for (int j = 0; j < op.map[i].length; j++)
+							{
+								op.map[i][j] = reader.readLine().charAt(0);
+							}
+						}
+
+						op.comboBox.setSelectedItem(reader.readLine());
+						op.comboBox_1.setSelectedItem(reader.readLine());
+						cmbPersonality.setSelectedItem(reader.readLine());
+
+						game = new Game((String) cmbPersonality.getSelectedItem());
+
+						if(Integer.parseInt(reader.readLine()) == 2)
+						{
+							game.advanceLevel();
+						}
+
+						game.setHero(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), reader.readLine().charAt(0));
+
+						if(cmbPersonality.getSelectedItem().equals("Novice"))
+						{
+							game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
+						}
+						else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
+						{
+							int x = Integer.parseInt(reader.readLine());
+							int y = Integer.parseInt(reader.readLine());
+							boolean direction;
+
+							if(reader.readLine() == "true")
+								direction = true;
 							else
-								playing = false;
-							
-							if(reader.readLine().equals("true"))
-								custom = true;
-							else
-								custom = false;
-							
-							op.map = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
-							
-							for(int i = 0; i < op.map.length; i++)
+								direction = false;
+
+							game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine())));
+
+						}
+						else
+						{
+							game.setGuard(new Suspicious(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Boolean.parseBoolean(reader.readLine()), Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine())));
+						}
+
+						char[][] m = game.getMap();
+						m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
+
+						for(int i = 0; i < m.length; i++)
+						{
+							for (int j = 0; j < m[i].length; j++)
 							{
-								for (int j = 0; j < op.map[i].length; j++)
-								{
-									op.map[i][j] = reader.readLine().charAt(0);
-								}
+								m[i][j] = reader.readLine().charAt(0);
 							}
-							
-							op.comboBox.setSelectedItem(reader.readLine());
-							op.comboBox_1.setSelectedItem(reader.readLine());
-							cmbPersonality.setSelectedItem(reader.readLine());
-							
-							game = new Game((String) cmbPersonality.getSelectedItem());
-							
-							if(Integer.parseInt(reader.readLine()) == 2)
+						}
+						game.setMap(m);
+
+						if (game.getLevel() == 2)
+						{
+							game.setOgre(new Ogre[nOgres]);
+							for(int i = 0; i < game.getOgre().length; i++)
 							{
-								game.advanceLevel();
+								game.getOgre()[i] = new Ogre(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine()), m);
 							}
-							
-							game.setHero(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), reader.readLine().charAt(0));
-							
-							if(cmbPersonality.getSelectedItem().equals("Novice"))
-							{
-								game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
-							}
-							else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
-							{
-								int x = Integer.parseInt(reader.readLine());
-								int y = Integer.parseInt(reader.readLine());
-								boolean direction;
-								
-								if(reader.readLine() == "true")
-									direction = true;
-								else
-									direction = false;
-								
-								game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine())));
-								
-							}
-							else
-							{
-								game.setGuard(new Suspicious(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Boolean.parseBoolean(reader.readLine()), Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine())));
-							}
-							
-							char[][] m = game.getMap();
-							m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
-							
-							for(int i = 0; i < m.length; i++)
-							{
-								for (int j = 0; j < m[i].length; j++)
-								{
-									m[i][j] = reader.readLine().charAt(0);
-								}
-							}
-							game.setMap(m);
-							
-							if (game.getLevel() == 2)
-							{
-								game.setOgre(new Ogre[nOgres]);
-								for(int i = 0; i < game.getOgre().length; i++)
-								{
-									game.getOgre()[i] = new Ogre(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine()), m);
-								}
-							}
-							
-							reader.close();
-							gameScreen.setMap(game.getMap());
-							frmDungeonKeep.repaint();
+						}
+
+						reader.close();
+						gameScreen.setMap(game.getMap());
+						frmDungeonKeep.repaint();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Invalid file format.");
 						frmDungeonKeep.requestFocusInWindow();
@@ -484,8 +546,8 @@ public class Window {
 		frmDungeonKeep.getContentPane().add(mntmLoadGame);
 
 	}
-	
-	
+
+
 
 	public String printMap(char [][] map)
 	{
