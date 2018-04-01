@@ -84,13 +84,13 @@ public class Drunken extends Guard{
 
 	/**
 	 * Creates a new Drunken Guard with the given position, x and y, direction, modifier, indice, symbol and sleepCount.
-	 * @param x X position
-	 * @param y Y position
-	 * @param dir direction of the Guard
-	 * @param mod modifier, probability of fall asleep
-	 * @param ind indice on Drunken path
-	 * @param sym symbol of the Drunken
-	 * @param sleep sleepCount of Guard sleep 
+	 * @param x X position.
+	 * @param y Y position.
+	 * @param dir direction of the Guard.
+	 * @param mod modifier, probability of fall asleep.
+	 * @param ind indice on Drunken path.
+	 * @param sym symbol of the Drunken.
+	 * @param sleep sleepCount of Guard sleep.
 	 */
 	public Drunken(int x, int y, boolean dir, float mod, int ind, char sym, int sleep) {
 		super(x,y);
@@ -102,7 +102,7 @@ public class Drunken extends Guard{
 	}
 
 	/**
-	 * Moves the Guard in the respective given map
+	 * Moves the Guard in the respective given map.
 	 * 
 	 * Respecting the logic of the game.
 	 * 
@@ -229,7 +229,8 @@ public class Drunken extends Guard{
 	/**
 	 * Saves the information of the Guard.
 	 * 
-	 * @param writer BufferedWriter writer to be set with the respective info. 
+	 * @param writer BufferedWriter writer to be set with the respective info.
+	 * @throws IOException Throws exception if fails on writing. 
 	 */
 	public void saveGame(BufferedWriter writer) throws IOException {
 		try {

@@ -1,7 +1,20 @@
 package DKeep.logic;
 
+/**
+ * Level_1.java - Level 1 class.
+ * 
+ * Has objects of level 1. Map, Hero and Guard.
+ * 
+ * @author André Esteves
+ * @version 1.0
+ * @since 2018-04-01
+ */
 public class Level_1 {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static char[][] createMap()
 	{
 		char[][] map = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
