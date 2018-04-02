@@ -503,7 +503,7 @@ public class Window {
 							else
 								direction = false;
 
-							game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine())));
+							game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
 
 						}
 						else

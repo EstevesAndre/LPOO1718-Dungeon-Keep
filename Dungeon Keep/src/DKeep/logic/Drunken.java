@@ -92,12 +92,15 @@ public class Drunken extends Guard{
 	 * @param sym symbol of the Drunken.
 	 * @param sleep sleepCount of Guard sleep.
 	 */
-	public Drunken(int x, int y, boolean dir, float mod, int ind, char sym, int sleep) {
+	public Drunken(int x, int y, boolean dir, float mod, int ind, int sleep) {
 		super(x,y);
 		direction = dir;
 		modifier = mod;
 		indice = ind;
-		symbol = sym;
+		if(sleep == 0)
+			symbol = 'G';
+		else
+			symbol = 'g';
 		sleepCount = sleep;
 	}
 
@@ -238,7 +241,6 @@ public class Drunken extends Guard{
 			writer.write(this.direction + "\n");
 			writer.write(this.modifier + "\n");
 			writer.write(this.indice + "\n");
-			writer.write(this.symbol + "\n");
 			writer.write(this.sleepCount + "\n");
 		} catch (IOException e) {
 			throw new IOException();

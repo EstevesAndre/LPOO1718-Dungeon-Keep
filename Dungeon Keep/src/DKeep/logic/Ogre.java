@@ -34,10 +34,10 @@ public class Ogre extends Character{
 	public Ogre(int x, int y, int xS, int yS, char sym, int sleep, char[][] m)
 	{
 		super(x, y);
-		xSwingPos = 1;
-		ySwingPos = 1;
-		symbol = '0';
-		sleepCount = 0;
+		xSwingPos = xS;
+		ySwingPos = yS;
+		symbol = sym;
+		sleepCount = sleep;
 		this.m = m;
 	}
 
