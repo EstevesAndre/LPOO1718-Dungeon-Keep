@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Assert;
 import org.junit.Test;
 
+import DKeep.logic.Drunken;
 import DKeep.logic.Game;
 import DKeep.logic.Level_2;
 
@@ -52,6 +53,19 @@ public class TestDKLogic {
 		assertEquals(8, g.getHero().getX());
 		assertEquals(2, g.getHero().getY());
 		assertEquals(2, g.evalStatus());
+	}
+	
+	@Test
+	public void testMoveGuardIntoHero() {
+		Game g = new Game();
+		g.setHero(7, 2);
+		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		assertEquals(7, g.getHero().getX());
+		assertEquals(2, g.getHero().getY());
+		assertEquals(g.evalStatus(), 2);
+		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		assertEquals(7, g.getHero().getX());
+		assertEquals(2, g.getHero().getY());
 	}
 
 	@Test
@@ -244,26 +258,82 @@ public class TestDKLogic {
 		assertEquals(y, g.getGuard().getY());
 
 		g = new Game("Intermediate");
+		
+		x = g.getGuard().getX();
+		y = g.getGuard().getY();
+		g.evalStatus();
+		assertTrue(x != g.getGuard().getX() || y != g.getGuard().getY());
+		
 		for(int i = 0; i < 500; i++)
 		{
+			x = g.getGuard().getX();
+			y = g.getGuard().getY();
 			g.evalStatus();
+			assertTrue(x == g.getGuard().getX() || x == g.getGuard().getX() + 1 || x == g.getGuard().getX() - 1);
+			assertTrue(y == g.getGuard().getY() || y == g.getGuard().getY() + 1 || y == g.getGuard().getY() - 1);		
 		}
 
-		assertTrue(g.getGuard().getX() > 0);
-		assertTrue(g.getGuard().getX() < 10);
-		assertTrue(g.getGuard().getY() > 0);
-		assertTrue(g.getGuard().getY() < 10);
+
 
 		g = new Game("Advanced");
+		
+		x = g.getGuard().getX();
+		y = g.getGuard().getY();
+		g.evalStatus();
+		assertTrue(x != g.getGuard().getX() || y != g.getGuard().getY());
 		for(int i = 0; i < 500; i++)
 		{
+			x = g.getGuard().getX();
+			y = g.getGuard().getY();
 			g.evalStatus();
+			assertTrue(x == g.getGuard().getX() || x == g.getGuard().getX() + 1 || x == g.getGuard().getX() - 1);
+			assertTrue(y == g.getGuard().getY() || y == g.getGuard().getY() + 1 || y == g.getGuard().getY() - 1);		
 		}
 
-		assertTrue(g.getGuard().getX() > 0);
-		assertTrue(g.getGuard().getX() < 10);
-		assertTrue(g.getGuard().getY() > 0);
-		assertTrue(g.getGuard().getY() < 10);
+
+	}
+
+	@Test
+	public void testGuardSleep(){
+		Game g = new Game("Intermediate");
+
+		while(!((Drunken)g.getGuard()).checkSleep());
+
+		int x = g.getGuard().getX();
+		int y = g.getGuard().getY();
+		g.evalStatus();
+		assertTrue(x == g.getGuard().getX());
+		assertTrue(y == g.getGuard().getY());
+
+		x = g.getGuard().getX();
+		y = g.getGuard().getY();
+		g.evalStatus();
+		assertTrue(x == g.getGuard().getX());
+		assertTrue(y == g.getGuard().getY());
+
+	}
+
+	@Test
+	public void testOgreBehaviour(){
+		Game g = new Game("Intermediate");
+		g.advanceLevel(1);
+
+		for(int i = 0; i < g.getOgre().length; i++)
+		{
+			assertTrue(g.getOgre()[i].getSymbol() == '0' || g.getOgre()[i].getSymbol() == '$');
+			g.getOgre()[i].stun(g.getMap());
+			assertEquals(g.getOgre()[i].getSymbol(), '8');
+		}
+		
+		g = new Game("Intermediate");
+		g.advanceLevel(1);
+		
+		int x = g.getOgre()[0].getX();
+		int y = g.getOgre()[0].getY();
+		g.evalStatus();
+		assertTrue(x != g.getOgre()[0].getX());
+		assertTrue(y == g.getOgre()[0].getY());
+
 	}
 
 }

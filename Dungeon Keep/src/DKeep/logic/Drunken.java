@@ -163,8 +163,10 @@ public class Drunken extends Guard{
 	 * Increments modifier and sets sleepCount.
 	 * 
 	 * If sleepCount is set, Drunken Guard fall asleep.
+	 * 
+	 * @return true if set asleep, false otherwise
 	 */
-	private void checkSleep ()
+	public boolean checkSleep ()
 	{
 		Random nr = new Random();
 
@@ -177,10 +179,14 @@ public class Drunken extends Guard{
 			sleepCount = nr.nextInt(3) + 2;
 
 			modifier = (float)1/3;
+			
+			return true;
 		}
 		else
 		{
 			modifier += (float)1/3;
+			
+			return false;
 		}
 	}
 	
