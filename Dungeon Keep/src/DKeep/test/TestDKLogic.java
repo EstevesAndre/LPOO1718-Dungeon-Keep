@@ -1,7 +1,9 @@
 package DKeep.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import DKeep.logic.Game;
@@ -19,6 +21,11 @@ public class TestDKLogic {
 		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
 		assertEquals(2, g.getHero().getX());
 		assertEquals(1, g.getHero().getY());
+		g.heroMove('d');
+		g.heroMove('s');
+		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
+		assertEquals(3, g.getHero().getX());
+		assertEquals(2, g.getHero().getY());
 	}
 
 	@Test
@@ -49,7 +56,7 @@ public class TestDKLogic {
 
 	@Test
 	public void testMoveHeroIntoToClosedDoor() {
-		Game g = new Game();
+		Game g = new Game("Intermediate");
 		g.setHero(1, 5);
 		assertEquals('H', g.getMap()[g.getHero().getY()][g.getHero().getX()]);
 		assertEquals(1, g.getHero().getX());
@@ -63,7 +70,7 @@ public class TestDKLogic {
 
 	@Test
 	public void testMoveHeroIntoToLever() {
-		Game g = new Game();
+		Game g = new Game("Advanced");
 		g.setHero(8, 8);
 		g.heroMove('a');
 		assertEquals('I', g.getMap()[5][0]);
@@ -158,23 +165,26 @@ public class TestDKLogic {
 
 	@Test
 	public void testOgreRandomBehaviour(){
-		Game g = new Game();
-		g.advanceLevel();
-		g.setOgre(4, 4);
-		boolean valMove = false;
-
-		Level_2.ogreMove(g.getMap(), g.getOgre());
-
-		if(g.getMap()[4][3] == '0' || 
-				g.getMap()[3][4] == '0' || 
-				g.getMap()[5][4] == '0' ||
-				g.getMap()[4][5] == '0')
+		for(int i = 0; i < 30; i++)
 		{
-			valMove = true;
+			Game g = new Game();
+			g.advanceLevel();
+			g.setOgre(4, 4);
+			boolean valMove = false;
+
+			Level_2.ogreMove(g.getMap(), g.getOgre());
+
+			if(g.getMap()[4][3] == '0' || 
+					g.getMap()[3][4] == '0' || 
+					g.getMap()[5][4] == '0' ||
+					g.getMap()[4][5] == '0')
+			{
+				valMove = true;
+			}
+
+
+			assertEquals(true, valMove);
 		}
-
-
-		assertEquals(true, valMove);
 	}
 
 	@Test
@@ -182,20 +192,78 @@ public class TestDKLogic {
 		Game g = new Game();
 		g.advanceLevel();
 		g.setOgre(4, 4);
-		boolean valMove = false;
-
-		Level_2.swingMove(g.getMap(), g.getOgre());
-
-		if(g.getMap()[4][3] == '*' || 
-				g.getMap()[3][4] == '*' || 
-				g.getMap()[5][4] == '*' ||
-				g.getMap()[4][5] == '*') 
+		for(int i = 0; i < 30; i++)
 		{
-			valMove = true;
+			boolean valMove = false;
+
+			Level_2.swingMove(g.getMap(), g.getOgre());
+
+			if(g.getMap()[4][3] == '*' || 
+					g.getMap()[3][4] == '*' || 
+					g.getMap()[5][4] == '*' ||
+					g.getMap()[4][5] == '*') 
+			{
+				valMove = true;
+			}
+
+
+			assertEquals(true, valMove);
+		}
+	}
+
+	@Test
+	public void testMapTransmition(){
+		Game g = new Game();
+		char[][] map = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, // size 9v9
+				{'I', ' ', ' ', ' ', ' ', ' ', ' ', 'k', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', 'A', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'} };
+		g.advanceLevel(0, map);
+		Assert.assertArrayEquals(g.getMap(), map);
+		g = new Game();
+		g.advanceLevel(0);
+		Assert.assertArrayEquals(g.getMap(), map);
+	}
+
+	@Test
+	public void testGuardMove() {
+		Game g = new Game();
+		int x = g.getGuard().getX();
+		int y = g.getGuard().getY();
+		for(int i = 0; i < 24; i++)
+		{
+			g.evalStatus();
 		}
 
+		assertEquals(x, g.getGuard().getX());
+		assertEquals(y, g.getGuard().getY());
 
-		assertEquals(true, valMove);
+		g = new Game("Intermediate");
+		for(int i = 0; i < 500; i++)
+		{
+			g.evalStatus();
+		}
+
+		assertTrue(g.getGuard().getX() > 0);
+		assertTrue(g.getGuard().getX() < 10);
+		assertTrue(g.getGuard().getY() > 0);
+		assertTrue(g.getGuard().getY() < 10);
+
+		g = new Game("Advanced");
+		for(int i = 0; i < 500; i++)
+		{
+			g.evalStatus();
+		}
+
+		assertTrue(g.getGuard().getX() > 0);
+		assertTrue(g.getGuard().getX() < 10);
+		assertTrue(g.getGuard().getY() > 0);
+		assertTrue(g.getGuard().getY() < 10);
 	}
 
 }
