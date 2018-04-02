@@ -118,52 +118,7 @@ public class Drunken extends Guard{
 		{
 			map[yPos][xPos] = ' ';
 
-			int num;
-
-			if(direction)
-			{
-				num = 1;
-			}
-			else
-			{
-				num = -1;
-			}
-
-			switch(path[indice] )
-			{
-			case 'd':
-			{
-				yPos += num;
-				break;
-			}
-			case 'u':
-			{
-				yPos -= num;
-				break;
-			}
-			case 'l':
-			{
-				xPos -= num;
-				break;
-			}
-			case 'r':
-			{
-				xPos += num;
-				break;
-			}
-			default: break;
-			}
-
-			indice += num;
-
-			if(indice == -1)
-			{
-				indice = path.length - 1;
-			}
-			else if(indice == path.length)
-			{
-				indice = 0;
-			}
+			indice = super.positionChange(indice, path, direction);
 
 			checkSleep();
 

@@ -70,6 +70,66 @@ public class Guard extends Character{
 		
 		map[yPos][xPos] = 'G';
 	}
+	
+	/**
+	 * Auxiliary function to some Guards' movement
+	 * Respecting some conditions (his path).
+	 * 
+	 * @param int indice current position in path
+	 * @param map char[][] path Guard's movement path.
+	 * @param boolean direction current Guard's direction in path
+	 */
+	public int positionChange(int indice, char[] path, boolean direction)
+	{
+		int num;
+
+		if(direction)
+		{
+			num = 1;
+		}
+		else
+		{
+			num = -1;
+		}
+
+		switch(path[indice] )
+		{
+		case 'd':
+		{
+			yPos += num;
+			break;
+		}
+		case 'u':
+		{
+			yPos -= num;
+			break;
+		}
+		case 'l':
+		{
+			xPos -= num;
+			break;
+		}
+		case 'r':
+		{
+			xPos += num;
+			break;
+		}
+		default: break;
+		}
+
+		indice += num;
+
+		if(indice == -1)
+		{
+			indice = path.length - 1;
+		}
+		else if(indice == path.length)
+		{
+			indice = 0;
+		}
+		
+		return indice;
+	}
 
 	/**
 	 * Saves the information of the Guard.
