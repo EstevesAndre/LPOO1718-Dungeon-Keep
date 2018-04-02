@@ -46,10 +46,10 @@ public class Level_2 {
 	}
 
 	/**
-	 * Creates the Hero for level 1 on his correct position. Hard coded.
-	 * On the position [1,1] of the current map.
+	 * Creates the Hero for level 2 on his correct position. Hard coded.
+	 * On the position [1,7] of the current map.
 	 *  
-	 * @return Hero of level 1.
+	 * @return Hero of level 2.
 	 */
 	public static Hero createHero()
 	{
@@ -57,6 +57,12 @@ public class Level_2 {
 		return h;
 	}
 
+	/**
+	 * Creates one Ogre in the given map on a random position with some restrictions.
+	 * 
+	 * @param map Given map (map of level 2) where the Ogre is going to be created.
+	 * @return Ogre created.
+	 */
 	public static Ogre createOgre(char[][]map)
 	{
 		boolean valid = true;
@@ -80,7 +86,12 @@ public class Level_2 {
 		return o;
 	}
 
-	
+	/**
+	 * Movements of Ogres[] o in the given map char[][].
+	 * 
+	 * @param map Map where Ogre is going to move.
+	 * @param o Set of Ogres created in the beginning.
+	 */
 	public static void ogreMove(char [][] map, Ogre[] o)
 	{
 		for(Ogre x : o)
@@ -89,6 +100,12 @@ public class Level_2 {
 		}	
 	}
 	
+	/**
+	 * Position of swing of each Ogre.
+	 * 
+	 * @param map Map where the swing is going to be set.
+	 * @param o Set of Ogres created in the beginning.
+	 */
 	public static void swingMove(char [][] map, Ogre[] o)
 	{
 		for(Ogre x : o)
@@ -97,11 +114,15 @@ public class Level_2 {
 		}
 	}
 	
-	/*
-	 * return:
-	 * 0: no end game reached
-	 * 1: victory condition reached
-	 * 2: defeat condition reached
+	/**
+	 * Evaluates the status of the current level.
+	 * 
+	 * @param map Map char[][] of current level.
+	 * @param h Hero of the level.
+	 * @param o set of Ogres of the level.
+	 * @return 0, if no end game reached.
+	 * 		1, if victory condition reached, level 1 completed.
+	 * 		2, if defeat condition reached, level 1 lost, got caught by any Ogre's swing.
 	 */
 	public static int evalStatus(char[][] map, Hero h, Ogre[] o)
 	{

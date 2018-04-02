@@ -4,6 +4,15 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Class Ogre - Character -> Ogre
+ * 
+ * Ogre for level 2.
+ * 
+ * @author André Esteves && Luís Diogo Silva
+ * @version 1.0
+ * @since 2018-04-02
+ */
 public class Ogre extends Character{
 
 	private int xSwingPos;
