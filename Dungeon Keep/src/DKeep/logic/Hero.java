@@ -8,7 +8,7 @@ import java.io.IOException;
  * 
  * Type of Character.
  * 
- * @author André Esteves
+ * @author André Esteves && Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-31
  */

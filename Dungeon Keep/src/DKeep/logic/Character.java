@@ -7,7 +7,7 @@ package DKeep.logic;
  * Represents the general character.
  * Which has x position and y position.
  * 
- * @author André Esteves
+ * @author André Esteves && Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-30
  */

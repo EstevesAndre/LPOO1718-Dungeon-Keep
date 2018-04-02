@@ -10,7 +10,7 @@ import java.util.Random;
  * Type of guard.
  * Which stops randomly for a specific time (2-5) seconds, also random.
  * 
- * @author André Esteves
+ * @author André Esteves && Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-30
  */

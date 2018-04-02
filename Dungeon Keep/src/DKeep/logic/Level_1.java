@@ -3,17 +3,28 @@ package DKeep.logic;
 /**
  * Level_1.java - Level 1 class.
  * 
- * Has objects of level 1. Map, Hero and Guard.
+ * Creates the objects of level 1. Map, Hero and Guard.
  * 
- * @author André Esteves
+ * Evaluates level (complete, lost, uncompleted).
+ *  
+ * @author André Esteves && Luís Diogo Silva
  * @version 1.0
  * @since 2018-04-01
  */
 public class Level_1 {
 
 	/**
+	 * Creates the map for level 1.
+	 * Like a matrix, char[][].
+	 * Size of 10x10.
+	 * X -> wall.
+	 * I -> Closed door.
+	 * S -> Open door.
+	 * H -> Hero.
+	 * G -> Guard.
+	 * l -> Lever.
 	 * 
-	 * @return
+	 * @return map of level 1, char[][] variable.
 	 */
 	public static char[][] createMap()
 	{
@@ -32,23 +43,40 @@ public class Level_1 {
 
 	}
 
+	/**
+	 * Creates the Hero for level 1 on his correct position. Hard coded.
+	 * On the position [1,1] of the current map.
+	 *  
+	 * @return Hero of level 1.
+	 */
 	public static Hero createHero()
 	{
 		Hero h = new Hero(1, 1, ' ', 'H');
 		return h;
 	}
 
+	/**
+	 * Creates the Guard for level 1 on his correct position. Hard coded.
+	 * On the position [8,1] of the current map.
+	 * There is created the standard Guard, Rookie Guard.
+	 * 
+	 * @return Guard of level 1.
+	 */
 	public static Guard createGuard()
 	{
 		Guard g = new Rookie(8, 1);
 		return g;
 	}
 
-	/*
-	 * return:
-	 * 0: no end game reached
-	 * 1: victory condition reached
-	 * 2: defeat condition reached
+	/**
+	 * Evaluates the status of the current level.
+	 * 
+	 * @param map Map char[][] of current level.
+	 * @param h Hero of the level.
+	 * @param g Guard [Rookie, Suspicious or Drunken] of the level.
+	 * @return 0, if no end game reached.
+	 * 		1, if victory condition reached, level 1 completed.
+	 * 		2, if defeat condition reached, level 1 lost, got caught by Guard.
 	 */
 	public static int evalStatus(char[][] map, Hero h, Guard g)
 	{
@@ -84,6 +112,18 @@ public class Level_1 {
 		return 0;
 	}
 
+	/**
+	 * Creates the Guard for level 1 on his correct position. Hard coded.
+	 * On the position [8,1] of the current map.
+	 * There is created the Guard [Rookie, Suspicious or Drunken] depending on personality argument.
+	 * 
+	 * @param personality Personality of the guard. 
+	 * if Novice -> Rookie Guard.
+	 * else if Advanced -> Suspicious Guard.
+	 * else -> Drunken Guard.
+	 * 
+	 * @return Guard of level 1.
+	 */
 	public static Guard createGuard(String personality) {
 		// TODO Auto-generated method stub
 		if(personality.equals("Novice"))

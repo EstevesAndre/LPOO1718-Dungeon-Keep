@@ -2,11 +2,36 @@ package DKeep.logic;
 
 import java.util.Random;
 
+/**
+ * Level_2.java - Level 2 class.
+ * 
+ * Creates the objects of level 2. Map, Hero, Ogres and swing.
+ * 
+ * Evaluates level (complete, lost, uncompleted).
+ * 
+ * @author André Esteves && Luís Diogo Silva
+ * @version 1.0
+ * @since 2018-04-02
+ */
 public class Level_2 {
 
+	/**
+	 * Creates the map for level 2.
+	 * Like a matrix, char[][]. 
+	 * Size of 9x9.
+	 * X -> wall.
+	 * I -> Closed door.
+	 * S -> Open door.
+	 * A -> Hero without key.
+	 * K -> Hero with key.
+	 * k -> key to unlock the door.
+	 * G -> Guard.
+	 * 
+	 * @return map of level 2, char[][] variable.
+	 */
 	public static char[][] createMap()
 	{
-		char[][] map = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, // size 9v9
+		char[][] map = { {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
 				{'I', ' ', ' ', ' ', ' ', ' ', ' ', 'k', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
@@ -20,6 +45,12 @@ public class Level_2 {
 
 	}
 
+	/**
+	 * Creates the Hero for level 1 on his correct position. Hard coded.
+	 * On the position [1,1] of the current map.
+	 *  
+	 * @return Hero of level 1.
+	 */
 	public static Hero createHero()
 	{
 		Hero h = new Hero(1, 7, ' ', 'A');

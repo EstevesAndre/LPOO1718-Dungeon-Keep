@@ -9,7 +9,7 @@ import java.io.IOException;
  * Type of Character.
  * SuperClass of each type of guards (Suspicious, Drunken and Rookie).
  * 
- * @author André Esteves
+ * @author André Esteves && Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-31
  */
