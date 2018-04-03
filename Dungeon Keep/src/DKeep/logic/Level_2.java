@@ -152,6 +152,11 @@ public class Level_2 {
 		{
 			return 2;
 		}
+		
+		if(h.getSymbol() == 'A')
+		{
+			map[1][7] = 'k';
+		}
 
 		return 0;
 	}
