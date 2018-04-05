@@ -432,40 +432,45 @@ public class Window {
 					return;
 				}
 
-				int status = game.evalStatus();
-
-				if(status == 2)
-				{
-					lblMessage.setText("GAME OVER!");
-					playing = false;
-				}
-				else if(status == 1)
-				{
-					if(game.getLevel() == 1)
-					{
-						if(custom)
-						{
-							char[][] map_c = new char[op.map.length][op.map[0].length];
-							for(int i = 0; i < op.map.length; i++)
-							{
-								map_c[i] = op.map[i].clone();
-							}
-							game.advanceLevel(nOgres, map_c);
-						}
-						else
-							game.advanceLevel(nOgres);
-					}
-					else
-					{
-						lblMessage.setText("VICTORY!");
-						playing = false;
-					}					
-				}
-				gameScreen.setMap(game.getMap());
-				frmDungeonKeep.repaint();
+				statusEval();
 			}
 
 		});
+		
+	}
+
+	protected void statusEval() {
+		int status = game.evalStatus();
+
+		if(status == 2)
+		{
+			lblMessage.setText("GAME OVER!");
+			playing = false;
+		}
+		else if(status == 1)
+		{
+			if(game.getLevel() == 1)
+			{
+				if(custom)
+				{
+					char[][] map_c = new char[op.map.length][op.map[0].length];
+					for(int i = 0; i < op.map.length; i++)
+					{
+						map_c[i] = op.map[i].clone();
+					}
+					game.advanceLevel(nOgres, map_c);
+				}
+				else
+					game.advanceLevel(nOgres);
+			}
+			else
+			{
+				lblMessage.setText("VICTORY!");
+				playing = false;
+			}					
+		}
+		gameScreen.setMap(game.getMap());
+		frmDungeonKeep.repaint();
 		
 	}
 
