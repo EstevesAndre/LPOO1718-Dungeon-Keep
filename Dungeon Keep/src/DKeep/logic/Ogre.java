@@ -124,7 +124,7 @@ public class Ogre extends Character{
 				map[yPos][xPos] = ' ';
 			}
 
-			
+			changePos();
 
 			if(map[yPos][xPos] == 'k')
 			{
@@ -166,7 +166,7 @@ public class Ogre extends Character{
 			map[ySwingPos][xSwingPos] = ' ';
 		}
 		
-		
+		changeSwingPos();
 
 		if(map[ySwingPos][xSwingPos] == 'k')
 		{
@@ -260,7 +260,7 @@ public class Ogre extends Character{
 				down = true;
 				break;
 			}
-		}while(muda_posicao || !(up && down && left && right));
+		}while(muda_posicao && !(up && down && left && right));
 	}
 	
 	
@@ -318,6 +318,6 @@ public class Ogre extends Character{
 				down = true;
 				break;
 			}
-		}while(muda_posicao || !(up && down && left && right));
+		}while(muda_posicao && !(up && down && left && right));
 	}
 }
