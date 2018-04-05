@@ -260,26 +260,7 @@ public class Game {
 		}
 		case 2:
 		{
-			int keyPos[] = {0,0};
-			if(h.getSymbol() != 'K')
-			{
-				for(int y = 0; y < map.length; y++)
-					for(int x = 0; x < map[y].length; x++)
-					{
-						if(map[y][x] == 'k')
-						{
-							keyPos[0] = x;
-							keyPos[1] = y;
-							break;
-						}
-					}
-			}
-			Level_2.ogreMove(map, o);
-			Level_2.swingMove(map,o);
-			if(keyPos[0] != 0 && keyPos[1] != 0)
-			{
-				map[keyPos[1]][keyPos[0]] = 'k';
-			}
+			lvl2Check();
 			return Level_2.evalStatus(map, h, o);
 		}
 		default:
@@ -411,5 +392,30 @@ public class Game {
 		
 	}
 
-	
+	/**
+	 * Performs several maintenance for level 2
+	 */
+	void lvl2Check()
+	{
+		int keyPos[] = {0,0};
+		if(h.getSymbol() != 'K')
+		{
+			for(int y = 0; y < map.length; y++)
+				for(int x = 0; x < map[y].length; x++)
+				{
+					if(map[y][x] == 'k')
+					{
+						keyPos[0] = x;
+						keyPos[1] = y;
+						break;
+					}
+				}
+		}
+		Level_2.ogreMove(map, o);
+		Level_2.swingMove(map,o);
+		if(keyPos[0] != 0 && keyPos[1] != 0)
+		{
+			map[keyPos[1]][keyPos[0]] = 'k';
+		}
+	}
 }

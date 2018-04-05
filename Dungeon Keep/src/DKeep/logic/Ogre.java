@@ -124,48 +124,7 @@ public class Ogre extends Character{
 				map[yPos][xPos] = ' ';
 			}
 
-			Random nr = new Random();
-			boolean muda_posicao = true;
-			boolean left = false,right = false,down = false,up = false;
 			
-			do {
-				int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
-				switch(num)
-				{
-				case 0:
-					if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
-					{
-						xPos++;
-						muda_posicao = false;
-					}
-					right = true;
-					break;
-				case 1:
-					if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
-					{
-						xPos--;
-						muda_posicao = false;
-					}
-					left = true;
-					break;
-				case 2:
-					if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
-					{
-						yPos--;
-						muda_posicao = false;
-					}
-					up = true;
-					break;
-				case 3:
-					if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
-					{
-						yPos++;
-						muda_posicao = false;
-					}
-					down = true;
-					break;
-				}
-			}while(muda_posicao || !(up && down && left && right));
 
 			if(map[yPos][xPos] == 'k')
 			{
@@ -207,6 +166,111 @@ public class Ogre extends Character{
 			map[ySwingPos][xSwingPos] = ' ';
 		}
 		
+		
+
+		if(map[ySwingPos][xSwingPos] == 'k')
+		{
+			map[ySwingPos][xSwingPos] = '$';
+		}
+		else
+		{
+			map[ySwingPos][xSwingPos] = '*';
+		}
+	}
+
+	/**
+	 * Stuns Ogre for 2 seconds. 
+	 * Changes his symbol to '8'.
+	 * Sets sleepCount variable to 2.
+	 * 
+	 * @param map given map where Ogre is stunned.
+	 */
+	public void stun(char [][] map)
+	{
+		symbol = '8';
+		map[yPos][xPos] = symbol;
+		sleepCount = 2;
+	}
+	
+	/**
+	 * Saves the information of the Guard.
+	 * 
+	 * @param writer BufferedWriter writer to be set with the respective info.
+	 * @throws IOException Throws exception if fails on writing. 
+	 */
+	public void saveGame(BufferedWriter writer) throws IOException {
+		try {
+			writer.write(this.xPos + "\n");
+			writer.write(this.yPos + "\n");
+			writer.write(this.xSwingPos + "\n");
+			writer.write(this.ySwingPos + "\n");
+			writer.write(this.symbol + "\n");
+			writer.write(this.sleepCount + "\n");
+		} catch (IOException e) {
+			throw new IOException();
+		}
+		
+	}
+	
+	/**
+	 * Changes position of guard randomly
+	 * Verifies for possible infinite loops
+	 *  
+	 */
+	void changePos()
+	{
+		Random nr = new Random();
+		boolean muda_posicao = true;
+		boolean left = false,right = false,down = false,up = false;
+		
+		do {
+			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
+			switch(num)
+			{
+			case 0:
+				if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
+				{
+					xPos++;
+					muda_posicao = false;
+				}
+				right = true;
+				break;
+			case 1:
+				if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
+				{
+					xPos--;
+					muda_posicao = false;
+				}
+				left = true;
+				break;
+			case 2:
+				if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
+				{
+					yPos--;
+					muda_posicao = false;
+				}
+				up = true;
+				break;
+			case 3:
+				if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
+				{
+					yPos++;
+					muda_posicao = false;
+				}
+				down = true;
+				break;
+			}
+		}while(muda_posicao || !(up && down && left && right));
+	}
+	
+	
+	/**
+	 * Changes swing position randomly
+	 * Verifies for possible infinite loops
+	 *  
+	 */
+	void changeSwingPos()
+	{
 		Random nr = new Random();
 		boolean muda_posicao = true;
 		
@@ -255,48 +319,5 @@ public class Ogre extends Character{
 				break;
 			}
 		}while(muda_posicao || !(up && down && left && right));
-
-		if(map[ySwingPos][xSwingPos] == 'k')
-		{
-			map[ySwingPos][xSwingPos] = '$';
-		}
-		else
-		{
-			map[ySwingPos][xSwingPos] = '*';
-		}
-	}
-
-	/**
-	 * Stuns Ogre for 2 seconds. 
-	 * Changes his symbol to '8'.
-	 * Sets sleepCount variable to 2.
-	 * 
-	 * @param map given map where Ogre is stunned.
-	 */
-	public void stun(char [][] map)
-	{
-		symbol = '8';
-		map[yPos][xPos] = symbol;
-		sleepCount = 2;
-	}
-	
-	/**
-	 * Saves the information of the Guard.
-	 * 
-	 * @param writer BufferedWriter writer to be set with the respective info.
-	 * @throws IOException Throws exception if fails on writing. 
-	 */
-	public void saveGame(BufferedWriter writer) throws IOException {
-		try {
-			writer.write(this.xPos + "\n");
-			writer.write(this.yPos + "\n");
-			writer.write(this.xSwingPos + "\n");
-			writer.write(this.ySwingPos + "\n");
-			writer.write(this.symbol + "\n");
-			writer.write(this.sleepCount + "\n");
-		} catch (IOException e) {
-			throw new IOException();
-		}
-		
 	}
 }
