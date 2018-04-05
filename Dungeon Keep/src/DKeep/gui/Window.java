@@ -331,9 +331,7 @@ public class Window {
 		lblGuardPersonality = new JLabel("Guard personality");
 		lblGuardPersonality.setBounds(44, 81, 116, 16);
 		frmDungeonKeep.getContentPane().add(lblGuardPersonality);
-
 		String[] difficultLevels = {"Novice", "Intermediate", "Advanced"};
-
 		cmbPersonality = new JComboBox<Object>(difficultLevels);
 		cmbPersonality.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -552,10 +550,8 @@ public class Window {
 		char[][] m = game.getMap();
 		m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
 		for(int i = 0; i < m.length; i++)
-		{
 			for (int j = 0; j < m[i].length; j++)
 				m[i][j] = reader.readLine().charAt(0);
-		}
 		game.setMap(m);
 
 		if (game.getLevel() == 2)
@@ -569,12 +565,10 @@ public class Window {
 	private void readLines3(BufferedReader reader) throws NumberFormatException, IOException {
 		if(cmbPersonality.getSelectedItem().equals("Novice"))
 			game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
-		else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
-		{
+		else if(cmbPersonality.getSelectedItem().equals("Intermediate")) {
 			int x = Integer.parseInt(reader.readLine());
 			int y = Integer.parseInt(reader.readLine());
 			boolean direction;
-
 			if(reader.readLine() == "true")
 				direction = true;
 			else

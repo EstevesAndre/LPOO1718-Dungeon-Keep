@@ -264,7 +264,6 @@ public class Options extends JDialog {
 		setTitle("Keep Level Options");
 		setBounds(100, 100, 393, 471);
 		getContentPane().setLayout(null);
-
 		char[][] m5 = { {'X', 'X', 'X', 'X', 'X', 'X', 'X'},
 				{'I', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', 'X'},
@@ -272,7 +271,6 @@ public class Options extends JDialog {
 				{'X', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X', 'X', 'X', 'X', 'X', 'X', 'X'}};
-
 		map = m5;
 		gameScreen = new Map();
 		lblDimensions = new JLabel("Dimensions:                      by");
