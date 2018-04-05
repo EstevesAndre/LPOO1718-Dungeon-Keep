@@ -340,10 +340,8 @@ public class Window {
 		});
 		cmbPersonality.setBounds(182, 78, 100, 22);
 		frmDungeonKeep.getContentPane().add(cmbPersonality);
-
 		gameScreen.setBounds(72, 124, 336, 323);
 		frmDungeonKeep.getContentPane().add(gameScreen);
-
 	}
 
 	private void ogreBoxInitialize() {
@@ -569,10 +567,8 @@ public class Window {
 			int x = Integer.parseInt(reader.readLine());
 			int y = Integer.parseInt(reader.readLine());
 			boolean direction;
-			if(reader.readLine() == "true")
-				direction = true;
-			else
-				direction = false;
+			if(reader.readLine() == "true") direction = true;
+			else direction = false;
 			game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
 		}
 		else
