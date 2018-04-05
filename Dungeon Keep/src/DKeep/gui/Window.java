@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -108,84 +109,7 @@ public class Window {
 
 					try {
 						BufferedReader reader = new BufferedReader(new FileReader(file));
-						nOgres = Integer.parseInt(reader.readLine());
-
-						if(reader.readLine().equals("true"))
-							playing = true;
-						else
-							playing = false;
-
-						if(reader.readLine().equals("true"))
-							custom = true;
-						else
-							custom = false;
-
-						op.map = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
-
-						for(int i = 0; i < op.map.length; i++)
-						{
-							for (int j = 0; j < op.map[i].length; j++)
-							{
-								op.map[i][j] = reader.readLine().charAt(0);
-							}
-						}
-
-						op.comboBox.setSelectedItem(reader.readLine());
-						op.comboBox_1.setSelectedItem(reader.readLine());
-						cmbPersonality.setSelectedItem(reader.readLine());
-
-						game = new Game((String) cmbPersonality.getSelectedItem());
-
-						if(Integer.parseInt(reader.readLine()) == 2)
-						{
-							game.advanceLevel();
-						}
-
-						game.setHero(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), reader.readLine().charAt(0));
-
-						if(cmbPersonality.getSelectedItem().equals("Novice"))
-						{
-							game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
-						}
-						else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
-						{
-							int x = Integer.parseInt(reader.readLine());
-							int y = Integer.parseInt(reader.readLine());
-							boolean direction;
-
-							if(reader.readLine() == "true")
-								direction = true;
-							else
-								direction = false;
-
-							game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
-
-						}
-						else
-						{
-							game.setGuard(new Suspicious(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Boolean.parseBoolean(reader.readLine()), Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine())));
-						}
-
-						char[][] m = game.getMap();
-						m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
-
-						for(int i = 0; i < m.length; i++)
-						{
-							for (int j = 0; j < m[i].length; j++)
-							{
-								m[i][j] = reader.readLine().charAt(0);
-							}
-						}
-						game.setMap(m);
-
-						if (game.getLevel() == 2)
-						{
-							game.setOgre(new Ogre[nOgres]);
-							for(int i = 0; i < game.getOgre().length; i++)
-							{
-								game.getOgre()[i] = new Ogre(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine()), m);
-							}
-						}
+						
 
 						reader.close();
 						gameScreen.setMap(game.getMap());
@@ -631,6 +555,108 @@ public class Window {
 		}
 
 		return true;
+	}
+	
+	void readLines(BufferedReader reader) throws NumberFormatException, IOException
+	{
+		readLines1(reader);
+		readLines2(reader);
+		readLines3(reader);
+		readLines4(reader);
+
+	}
+
+	private void readLines4(BufferedReader reader) throws NumberFormatException, IOException {
+
+		char[][] m = game.getMap();
+		m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
+
+		for(int i = 0; i < m.length; i++)
+		{
+			for (int j = 0; j < m[i].length; j++)
+			{
+				m[i][j] = reader.readLine().charAt(0);
+			}
+		}
+		game.setMap(m);
+
+		if (game.getLevel() == 2)
+		{
+			game.setOgre(new Ogre[nOgres]);
+			for(int i = 0; i < game.getOgre().length; i++)
+			{
+				game.getOgre()[i] = new Ogre(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine()), m);
+			}
+		}
+		
+	}
+
+	private void readLines3(BufferedReader reader) throws NumberFormatException, IOException {
+		if(cmbPersonality.getSelectedItem().equals("Novice"))
+		{
+			game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
+		}
+		else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
+		{
+			int x = Integer.parseInt(reader.readLine());
+			int y = Integer.parseInt(reader.readLine());
+			boolean direction;
+
+			if(reader.readLine() == "true")
+				direction = true;
+			else
+				direction = false;
+
+			game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
+
+		}
+		else
+		{
+			game.setGuard(new Suspicious(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Boolean.parseBoolean(reader.readLine()), Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine())));
+		}
+		
+	}
+
+	private void readLines2(BufferedReader reader) throws IOException {
+		op.comboBox.setSelectedItem(reader.readLine());
+		op.comboBox_1.setSelectedItem(reader.readLine());
+		cmbPersonality.setSelectedItem(reader.readLine());
+
+		game = new Game((String) cmbPersonality.getSelectedItem());
+
+		if(Integer.parseInt(reader.readLine()) == 2)
+		{
+			game.advanceLevel();
+		}
+
+		game.setHero(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), reader.readLine().charAt(0));
+
+		
+	}
+
+	private void readLines1(BufferedReader reader) throws NumberFormatException, IOException {
+		nOgres = Integer.parseInt(reader.readLine());
+
+		if(reader.readLine().equals("true"))
+			playing = true;
+		else
+			playing = false;
+
+		if(reader.readLine().equals("true"))
+			custom = true;
+		else
+			custom = false;
+
+		op.map = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
+
+		for(int i = 0; i < op.map.length; i++)
+		{
+			for (int j = 0; j < op.map[i].length; j++)
+			{
+				op.map[i][j] = reader.readLine().charAt(0);
+			}
+		}
+		
 	}
 }
 
