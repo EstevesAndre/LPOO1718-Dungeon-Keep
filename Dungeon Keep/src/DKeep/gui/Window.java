@@ -109,7 +109,7 @@ public class Window {
 
 					try {
 						BufferedReader reader = new BufferedReader(new FileReader(file));
-						
+						readLines(reader);
 
 						reader.close();
 						gameScreen.setMap(game.getMap());
