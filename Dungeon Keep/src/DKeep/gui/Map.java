@@ -25,7 +25,7 @@ public class Map extends JPanel{
 	private BufferedImage sleepIMG;
 	
 	public Map() {
-		// TODO Auto-generated constructor stub
+		
 		super();
 		map = null;
 		wallIMG = null;
@@ -40,16 +40,16 @@ public class Map extends JPanel{
 		sleepIMG = null;
 		
 		try {
-			wallIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_WALL.png"));
-			heroIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_HERO.png"));
-			guardIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_GUARD.png"));
-			ogreIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_OGRE.png"));
-			clubIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_CLUB.jpg"));
-			doorOpenIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_DOOROPEN.png"));	
-			doorClosedIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_DOORCLOSED.png"));
-			keyIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_KEY.png"));
-			leverIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_LEVER.png"));
-			sleepIMG = ImageIO.read(this.getClass().getResource("/DungeonKeep_SLEEP.png"));			
+			wallIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_WALL.png"));
+			heroIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_HERO.png"));
+			guardIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_GUARD.png"));
+			ogreIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_OGRE.png"));
+			clubIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_CLUB.jpg"));
+			doorOpenIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_DOOROPEN.png"));	
+			doorClosedIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_DOORCLOSED.png"));
+			keyIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_KEY.png"));
+			leverIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_LEVER.png"));
+			sleepIMG = ImageIO.read(this.getClass().getResource("/Images/DungeonKeep_SLEEP.png"));			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

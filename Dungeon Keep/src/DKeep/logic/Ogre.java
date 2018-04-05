@@ -126,6 +126,8 @@ public class Ogre extends Character{
 
 			Random nr = new Random();
 			boolean muda_posicao = true;
+			boolean left = false,right = false,down = false,up = false;
+			
 			do {
 				int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
 				switch(num)
@@ -136,6 +138,7 @@ public class Ogre extends Character{
 						xPos++;
 						muda_posicao = false;
 					}
+					right = true;
 					break;
 				case 1:
 					if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
@@ -143,6 +146,7 @@ public class Ogre extends Character{
 						xPos--;
 						muda_posicao = false;
 					}
+					left = true;
 					break;
 				case 2:
 					if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
@@ -150,6 +154,7 @@ public class Ogre extends Character{
 						yPos--;
 						muda_posicao = false;
 					}
+					up = true;
 					break;
 				case 3:
 					if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
@@ -157,9 +162,10 @@ public class Ogre extends Character{
 						yPos++;
 						muda_posicao = false;
 					}
+					down = true;
 					break;
 				}
-			}while(muda_posicao);
+			}while(muda_posicao || !(up && down && left && right));
 
 			if(map[yPos][xPos] == 'k')
 			{
@@ -200,9 +206,13 @@ public class Ogre extends Character{
 		{
 			map[ySwingPos][xSwingPos] = ' ';
 		}
-
+		
 		Random nr = new Random();
 		boolean muda_posicao = true;
+		
+		boolean left = false,right = false,down = false,up = false;
+		
+		
 		do {
 			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
 			switch(num)
@@ -214,6 +224,7 @@ public class Ogre extends Character{
 					xSwingPos = xPos + 1;
 					muda_posicao = false;
 				}
+				right = true;
 				break;
 			case 1:
 				if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
@@ -222,6 +233,7 @@ public class Ogre extends Character{
 					xSwingPos = xPos - 1;
 					muda_posicao = false;
 				}
+				left = true;
 				break;
 			case 2:
 				if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
@@ -230,17 +242,19 @@ public class Ogre extends Character{
 					xSwingPos = xPos;
 					muda_posicao = false;
 				}
+				up = true;
 				break;
 			case 3:
 				if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
 				{
 					ySwingPos = yPos + 1;
 					xSwingPos = xPos;
-					muda_posicao = false;
+					muda_posicao = false;					
 				}
+				down = true;
 				break;
 			}
-		}while(muda_posicao);
+		}while(muda_posicao || !(up && down && left && right));
 
 		if(map[ySwingPos][xSwingPos] == 'k')
 		{

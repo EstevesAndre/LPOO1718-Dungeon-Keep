@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="Dungeon Keep/src"/>
+	<classpathentry excluding="Images/" kind="src" path="Dungeon Keep/src"/>
 	<classpathentry kind="src" path="Images"/>
+	<classpathentry kind="src" path="Dungeon Keep/Images"/>
+	<classpathentry kind="src" path="Dungeon Keep/src/Images"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="Dungeon Keep/bin"/>
 </classpath>

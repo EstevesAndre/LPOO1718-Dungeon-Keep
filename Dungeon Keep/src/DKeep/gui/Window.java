@@ -308,7 +308,9 @@ public class Window {
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
 				int cntHero = 0, cntKey = 0, cntOgre = 0, xHero = 0, yHero = 0;
-
+				
+				lblMessage.setText("WASD to move");
+				
 				nOgres = Integer.parseInt((String)cmbOgres.getSelectedItem());
 
 				if(!op.rdbtnRandom.isSelected())
@@ -505,7 +507,7 @@ public class Window {
 
 	private void frameInitialize() {
 		frmDungeonKeep = new JFrame();
-		frmDungeonKeep.setIconImage(Toolkit.getDefaultToolkit().getImage(Window.class.getResource("/DungeonKeep_TORCH.png")));
+		frmDungeonKeep.setIconImage(Toolkit.getDefaultToolkit().getImage(Window.class.getResource("/Images/DungeonKeep_TORCH.png")));
 		addKeyListner();
 		frmDungeonKeep.setResizable(false);
 		frmDungeonKeep.setTitle("Dungeon Keep");
