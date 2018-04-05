@@ -90,7 +90,6 @@ public class Guard extends Character{
 
 		positionChangeSwitch(indice,path,num);
 		indice += num;
-
 		if(indice == -1)
 			indice = path.length - 1;
 		else if(indice == path.length)	
