@@ -21,26 +21,26 @@ public class Drunken extends Guard{
 	 * Can be true, normal path, or false, inverted path.
 	 */
 	boolean direction;
-	
+
 	/**
 	 * Value of the initial probability of the Drunken Guard stop.
 	 * Standard value is float(1/3).
 	 */
 	float modifier;
-	
+
 	/**
 	 * Indice of the Drunken Guard on his path.
 	 * Initial value when created is 0.  
 	 */
 	int indice;
-	
+
 	/**
 	 * Symbol of the Drunken Guard.
 	 * When Guard is in moving state, symbol is equal to 'G'.
 	 * When he is sleeping, symbol is equal to 'g'.
 	 */
 	char symbol;
-	
+
 	/**
 	 * Number of movements of Hero can do without Drunken Guard move.
 	 * Starts at 0.
@@ -50,7 +50,7 @@ public class Drunken extends Guard{
 	 * If reaches 0, Drunken Guard wake up and move normally.
 	 */
 	int sleepCount;
-	
+
 	/**
 	 * Path of the Drunken Guard.
 	 * Array of Char's.
@@ -66,7 +66,7 @@ public class Drunken extends Guard{
 			'r','r','u','u','u','u','u'
 	};
 
-	
+
 	/**
 	 * Creates a new Drunken Guard with the given position, x and y.
 	 * @param x X position.
@@ -116,47 +116,62 @@ public class Drunken extends Guard{
 
 		if(sleepCount == 0)
 		{
-			map[yPos][xPos] = ' ';
-
-			indice = super.positionChange(indice, path, direction);
-
-			checkSleep();
-
-			map[yPos][xPos] = symbol;
+			moveWithoutSleepCount(map);
 		}
 		else
 		{
-			sleepCount--;
-
-			if(sleepCount == 0)
-			{
-				Random nr = new Random();
-
-				if(nr.nextBoolean()) {
-
-					if(direction)
-					{
-						indice--;
-					}
-					else
-					{
-						indice ++;
-					}
-
-					if(indice == -1)
-					{
-						indice = path.length - 1;
-					}
-					else if(indice == path.length)
-					{
-						indice = 0;
-					}
-
-					direction = !direction;
-				}				
-				symbol = 'G';
-			}
+			moveWithSleepCount(map);
 		}
+
+	}
+
+	/**
+	 * Moves the Guard in the respective given map when sleepCount is not 0.
+	 * 
+	 * Respecting the logic of the game.
+	 * 
+	 * @param map char[][] Map to be set.
+	 */
+	public void moveWithSleepCount (char[][] map)
+	{
+		sleepCount--;
+		if(sleepCount == 0)
+		{
+			Random nr = new Random();
+			if(nr.nextBoolean()) {
+
+				if(direction)
+					indice--;
+				else
+					indice ++;
+
+				if(indice == -1)
+					indice = path.length - 1;
+				else if(indice == path.length)
+					indice = 0;
+
+				direction = !direction;
+			}				
+			symbol = 'G';
+		}
+	}
+
+	/**
+	 * Moves the Guard in the respective given map when sleepCount is 0.
+	 * 
+	 * Respecting the logic of the game.
+	 * 
+	 * @param map char[][] Map to be set.
+	 */
+	public void moveWithoutSleepCount (char[][] map) 
+	{
+		map[yPos][xPos] = ' ';
+
+		indice = super.positionChange(indice, path, direction);
+
+		checkSleep();
+
+		map[yPos][xPos] = symbol;
 	}
 
 	/**
@@ -179,17 +194,17 @@ public class Drunken extends Guard{
 			sleepCount = nr.nextInt(3) + 2;
 
 			modifier = (float)1/3;
-			
+
 			return true;
 		}
 		else
 		{
 			modifier += (float)1/3;
-			
+
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Saves the information of the Guard.
 	 * 
@@ -206,7 +221,7 @@ public class Drunken extends Guard{
 		} catch (IOException e) {
 			throw new IOException();
 		}
-		
+
 	}
 
 }
