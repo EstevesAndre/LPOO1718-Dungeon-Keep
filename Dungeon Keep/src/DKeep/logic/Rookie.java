@@ -4,12 +4,12 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**
- * Class Rookie - Character -> Guard -> Rookie 
+ * Class Rookie - Character - Guard - Rookie 
  * 
  * Type of guard.
  * Standard Guard.
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-04-02
  */

@@ -9,7 +9,7 @@ import java.util.Random;
  * 
  * Evaluates level (complete, lost, uncompleted).
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-04-02
  */
@@ -19,13 +19,13 @@ public class Level_2 {
 	 * Creates the map for level 2.
 	 * Like a matrix, char[][]. 
 	 * Size of 9x9.
-	 * X -> wall.
-	 * I -> Closed door.
-	 * S -> Open door.
-	 * A -> Hero without key.
-	 * K -> Hero with key.
-	 * k -> key to unlock the door.
-	 * G -> Guard.
+	 * X - wall.
+	 * I - Closed door.
+	 * S - Open door.
+	 * A - Hero without key.
+	 * K - Hero with key.
+	 * k - key to unlock the door.
+	 * G - Guard.
 	 * 
 	 * @return map of level 2, char[][] variable.
 	 */

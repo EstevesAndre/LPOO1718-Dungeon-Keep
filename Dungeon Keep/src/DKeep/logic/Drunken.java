@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Class Drunken - Character -> Guard -> Drunken 
+ * Class Drunken - Character - Guard - Drunken 
  * 
  * Type of guard.
  * Which stops randomly for a specific time (2-5) seconds, also random.
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-30
  */
@@ -29,7 +29,7 @@ public class Drunken extends Guard{
 	float modifier;
 
 	/**
-	 * Indice of the Drunken Guard on his path.
+	 * Index of the Drunken Guard on his path.
 	 * Initial value when created is 0.  
 	 */
 	int indice;
@@ -88,8 +88,7 @@ public class Drunken extends Guard{
 	 * @param y Y position.
 	 * @param dir direction of the Guard.
 	 * @param mod modifier, probability of fall asleep.
-	 * @param ind indice on Drunken path.
-	 * @param sym symbol of the Drunken.
+	 * @param ind index on Drunken path.
 	 * @param sleep sleepCount of Guard sleep.
 	 */
 	public Drunken(int x, int y, boolean dir, float mod, int ind, int sleep) {

@@ -4,12 +4,12 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**
- * Class Guard - Character -> Guard
+ * Class Guard - Character - Guard
  * 
  * Type of Character.
  * SuperClass of each type of guards (Suspicious, Drunken and Rookie).
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-31
  */
@@ -49,6 +49,12 @@ public class Guard extends Character{
 		map[yPos][xPos] = 'G';
 	}
 
+	/**
+	 * Moves the Guard in the respective given map.
+	 * Respecting some conditions (his path).
+	 * 
+	 * @param map char[][] map to be set with Guard's movement.
+	 */
 	public void movePart2(char [][]map)
 	{
 		if(yPos == 6)
@@ -69,12 +75,14 @@ public class Guard extends Character{
 	
 	
 	/**
-	 * Auxiliary function to some Guards' movement
+	 * Auxiliary function to some Guards' movement.
 	 * Respecting some conditions (his path).
 	 * 
-	 * @param int index current position in path
-	 * @param map char[][] path Guard's movement path.
-	 * @param boolean direction current Guard's direction in path
+	 * @param indice integer index of current position in path.
+	 * @param path char[][] path Guard's movement path.
+	 * @param direction current Guard's direction in path.
+	 * 
+	 * @return index of position to move Guard.
 	 */
 	public int positionChange(int indice, char[] path, boolean direction)
 	{
@@ -96,11 +104,11 @@ public class Guard extends Character{
 	}
 
 	/**
-	 * Auxiliary function to positionChange function
+	 * Auxiliary function to positionChange function.
 	 * Respecting some conditions (his path).
 	 * 
-	 * @param int index current position in path
-	 * @param map char[][] path Guard's movement path.
+	 * @param indice index of current position in path.
+	 * @param path char[][] Guard's movement path.
 	 * @param num direction number, can be 1 or -1.
 	 */
 	public void positionChangeSwitch(int indice, char[] path, int num)

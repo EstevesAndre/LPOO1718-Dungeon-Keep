@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Class Game - Main Class when the game runs.
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-30
  */

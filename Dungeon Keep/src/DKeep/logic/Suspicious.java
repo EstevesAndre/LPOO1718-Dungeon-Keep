@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Class Suspicious - Character -> Guard -> Suspicious 
+ * Class Suspicious - Character - Guard - Suspicious 
  * 
  * Type of guard.
  * Which stops randomly and changes direction.
  * 
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-04-02
  */
@@ -30,7 +30,7 @@ public class Suspicious extends Guard {
 	float modifier;
 	
 	/**
-	 * Indice of the Suspicious Guard on his path.
+	 * Index of the Suspicious Guard on his path.
 	 * Initial value when created is 0.  
 	 */
 	int indice;
@@ -64,12 +64,12 @@ public class Suspicious extends Guard {
 	}
 
 	/**
-	 * Creates a new Suspicious Guard with the given position, x and y, direction, modifier, indice.
+	 * Creates a new Suspicious Guard with the given position, x and y, direction, modifier, index.
 	 * @param x X position.
 	 * @param y Y position.
 	 * @param dir direction of the Guard.
 	 * @param mod modifier, probability of fall asleep.
-	 * @param ind indice on Suspicious path.
+	 * @param ind index on Suspicious path.
 	 */
 	public Suspicious(int x, int y, boolean dir, float mod, int ind) {
 		super(x,y);

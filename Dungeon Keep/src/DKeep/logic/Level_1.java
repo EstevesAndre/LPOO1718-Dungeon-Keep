@@ -7,7 +7,7 @@ package DKeep.logic;
  * 
  * Evaluates level (complete, lost, uncompleted).
  *  
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-04-01
  */
@@ -17,12 +17,12 @@ public class Level_1 {
 	 * Creates the map for level 1.
 	 * Like a matrix, char[][].
 	 * Size of 10x10.
-	 * X -> wall.
-	 * I -> Closed door.
-	 * S -> Open door.
-	 * H -> Hero.
-	 * G -> Guard.
-	 * l -> Lever.
+	 * X - wall.
+	 * I - Closed door.
+	 * S - Open door.
+	 * H - Hero.
+	 * G - Guard.
+	 * l - Lever.
 	 * 
 	 * @return map of level 1, char[][] variable.
 	 */
@@ -118,9 +118,9 @@ public class Level_1 {
 	 * There is created the Guard [Rookie, Suspicious or Drunken] depending on personality argument.
 	 * 
 	 * @param personality Personality of the guard. 
-	 * if Novice -> Rookie Guard.
-	 * else if Advanced -> Suspicious Guard.
-	 * else -> Drunken Guard.
+	 * if Novice 		-	Rookie Guard.
+	 * else if Advanced - 	Suspicious Guard.
+	 * else 			-	 Drunken Guard.
 	 * 
 	 * @return Guard of level 1.
 	 */

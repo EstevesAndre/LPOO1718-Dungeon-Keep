@@ -4,11 +4,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**
- * Class Hero - Character -> Hero
+ * Class Hero - Character - Hero
  * 
  * Type of Character.
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-03-31
  */
@@ -117,12 +117,12 @@ public class Hero extends Character{
 		{
 			map[yPos][xPos-1] = 'S';
 		}
-		else if(map[yPos][xPos-1] != 'X' && map[yPos][xPos-1] != 'I') // if next position is not a wall or closed door
+		else if(map[yPos][xPos-1] != 'X' && map[yPos][xPos-1] != 'I') 
 		{
 			map[yPos][xPos] = currentPos;
-			xPos--; //updates coordinates
+			xPos--;
 			currentPos = map[yPos][xPos];
-			map[yPos][xPos] = symbol; //moves hero
+			map[yPos][xPos] = symbol;
 		}
 	}
 

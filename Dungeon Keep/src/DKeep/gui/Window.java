@@ -47,9 +47,6 @@ public class Window {
 	private JButton mntmLoadGame;
 	private final JFileChooser fc = new JFileChooser();;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

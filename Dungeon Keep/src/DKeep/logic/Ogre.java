@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Class Ogre - Character -> Ogre
+ * Class Ogre - Character - Ogre
  * 
  * Ogre for level 2.
  * 
- * @author André Esteves && Luís Diogo Silva
+ * @author André Esteves and Luís Diogo Silva
  * @version 1.0
  * @since 2018-04-02
  */
@@ -123,7 +123,7 @@ public class Ogre extends Character{
 				symbol = '0';
 		}
 	}
-	
+
 	/**
 	 * Moves the Ogre in the respective given map when sleepCount is 0.
 	 * 
@@ -205,8 +205,8 @@ public class Ogre extends Character{
 	}
 
 	/**
-	 * Changes position of guard randomly
-	 * Verifies for possible infinite loops
+	 * Changes position of guard randomly.
+	 * Verifies for possible infinite loops.
 	 */
 	void changePos() {
 		Random nr = new Random();
@@ -223,8 +223,10 @@ public class Ogre extends Character{
 	}
 
 	/**
-	 * Changes position of guard to Right if possible
-	 * Verifies for possible infinite loops
+	 * Changes position of guard to Right if possible.
+	 * Verifies for possible infinite loops.
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Ogre move.
 	 */
 	void changePosRight(boolean[] vals)
 	{
@@ -235,10 +237,12 @@ public class Ogre extends Character{
 		}
 		vals[1] = true;
 	}
-	
+
 	/**
-	 * Changes position of guard to Left if possible
-	 * Verifies for possible infinite loops
+	 * Changes position of guard to Left if possible.
+	 * Verifies for possible infinite loops.
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Ogre move.
 	 */
 	void changePosLeft(boolean[] vals)
 	{
@@ -249,10 +253,12 @@ public class Ogre extends Character{
 		}
 		vals[2] = true;
 	}
-	
+
 	/**
-	 * Changes position of guard up if possible
-	 * Verifies for possible infinite loops
+	 * Changes position of guard up if possible.
+	 * Verifies for possible infinite loops.
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Ogre move.
 	 */
 	void changePosUp(boolean[] vals)
 	{
@@ -263,10 +269,12 @@ public class Ogre extends Character{
 		}
 		vals[3] = true;
 	}
-	
+
 	/**
-	 * Changes position of guard down if possible
-	 * Verifies for possible infinite loops
+	 * Changes position of guard down if possible.
+	 * Verifies for possible infinite loops.
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Ogre move.
 	 */
 	void changePosDown(boolean[] vals)
 	{
@@ -279,8 +287,8 @@ public class Ogre extends Character{
 	}
 
 	/**
-	 * Changes swing position randomly
-	 * Verifies for possible infinite loops  
+	 * Changes swing position randomly.
+	 * Verifies for possible infinite loops.  
 	 */
 	void changeSwingPos() {
 		Random nr = new Random();
@@ -290,20 +298,22 @@ public class Ogre extends Character{
 			switch(num)
 			{
 			case 0:	changeSwingPosRight(vals);
-				break;
+			break;
 			case 1:	changeSwingPosLeft(vals);
-				break;
+			break;
 			case 2: changeSwingPosUp(vals);
-				break;
+			break;
 			case 3:	changeSwingPosDown(vals);
-				break;
+			break;
 			}
 		}while(vals[0] && !(vals[1] && vals[2] && vals[3] && vals[4]));
 	}
-	
+
 	/**
-	 * Changes swing position to right if possible
-	 * Verifies for possible infinite loops  
+	 * Changes swing position to right if possible.
+	 * Verifies for possible infinite loops.
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Swing position.
 	 */
 	void changeSwingPosRight(boolean[] vals)
 	{
@@ -315,10 +325,12 @@ public class Ogre extends Character{
 		}
 		vals[1] = true;
 	}
-	
+
 	/**
-	 * Changes swing position to left if possible
-	 * Verifies for possible infinite loops  
+	 * Changes swing position to left if possible.
+	 * Verifies for possible infinite loops.
+	 *   
+	 * @param vals boolean[] where keep values to check possibility of an Swing position.
 	 */
 	void changeSwingPosLeft(boolean[] vals)
 	{
@@ -330,10 +342,12 @@ public class Ogre extends Character{
 		}
 		vals[2] = true;
 	}
-	
+
 	/**
-	 * Changes swing position up if possible
-	 * Verifies for possible infinite loops  
+	 * Changes swing position up if possible.
+	 * Verifies for possible infinite loops.
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Swing position.
 	 */
 	void changeSwingPosUp(boolean[] vals)
 	{
@@ -345,10 +359,12 @@ public class Ogre extends Character{
 		}
 		vals[3] = true;
 	}
-	
+
 	/**
-	 * Changes swing position down if possible
-	 * Verifies for possible infinite loops  
+	 * Changes swing position down if possible.
+	 * Verifies for possible infinite loops.  
+	 * 
+	 * @param vals boolean[] where keep values to check possibility of an Swing position.
 	 */
 	void changeSwingPosDown(boolean[] vals)
 	{
