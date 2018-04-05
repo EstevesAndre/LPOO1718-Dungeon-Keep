@@ -23,9 +23,7 @@ public class DungeonKeep {
 		Game g = new Game();
 		int victory; //victory status
 		Scanner reader = new Scanner(System.in);
-
-		while(true)
-		{
+		while(true) {
 			printMap(g.getMap());
 			System.out.print("Select direction -  [WASD]: ");
 			char m = reader.next().charAt(0);
@@ -52,9 +50,7 @@ public class DungeonKeep {
 					break;
 				}
 			}
-		}
-		
+		}	
 		reader.close();
 	}
-
 }

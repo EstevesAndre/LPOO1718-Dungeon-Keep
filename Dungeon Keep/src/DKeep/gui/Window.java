@@ -92,7 +92,7 @@ public class Window {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Dungeon Keep Save Files (*.dks)", "dks");
 		fc.addChoosableFileFilter(filter);
 		fc. setAcceptAllFileFilterUsed(false);
-		
+
 	}
 
 	private void loadBtnInitialize() {
@@ -123,7 +123,7 @@ public class Window {
 			}
 		});
 		frmDungeonKeep.getContentPane().add(mntmLoadGame);
-		
+
 	}
 
 	private void saveBtnInitialize() {
@@ -161,7 +161,7 @@ public class Window {
 			}
 		});
 		frmDungeonKeep.getContentPane().add(mntmSaveGame);
-		
+
 	}
 
 	void writeLines(BufferedWriter writer) throws IOException
@@ -172,27 +172,19 @@ public class Window {
 		writer.write(op.map.length + "\n");
 		writer.write(op.map[0].length + "\n");
 
-
 		for(char[] line : op.map)
-		{
 			for (char c : line)
-			{
 				writer.write(c + "\n");
-			}
-		}
 
 		writer.write(op.comboBox.getSelectedItem() + "\n");
 		writer.write(op.comboBox_1.getSelectedItem() + "\n");
-
 		writer.write(cmbPersonality.getSelectedItem() + "\n");
-
 		writer.write(game.getLevel() + "\n");
-
 		writeLines2(writer);
 	}
-	
-	
-	
+
+
+
 	private void writeLines2(BufferedWriter writer) throws IOException {
 		game.getHero().saveGame(writer);
 		game.getGuard().saveGame(writer);
@@ -201,21 +193,12 @@ public class Window {
 		writer.write(game.getMap().length + "\n");
 
 		for(char[] line : game.getMap())
-		{
 			for (char c : line)
-			{
 				writer.write(c + "\n");
-			}
-		}
 
 		if (game.getLevel() == 2)
-		{
 			for(Ogre o : game.getOgre())
-			{
 				o.saveGame(writer);
-			}
-		}
-		
 	}
 
 	private void optionsBtnInitialize() {
@@ -227,7 +210,7 @@ public class Window {
 		});
 		btnOptions.setBounds(340, 78, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnOptions);
-		
+
 	}
 
 	private void newGameBtnInitialize() {
@@ -235,18 +218,18 @@ public class Window {
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {				
 				int cntHero = 0, cntKey = 0, cntOgre = 0, xHero = 0, yHero = 0;
-				
+
 				lblMessage.setText("WASD to move");
-				
+
 				nOgres = Integer.parseInt((String)cmbOgres.getSelectedItem());
-				
+
 				int[] vals = {cntHero, cntKey, cntOgre, xHero, yHero};
-				
-				
+
+
 
 				if(!op.rdbtnRandom.isSelected())
 				{
-					
+
 					mapCnt(vals);
 					if(!errorChk(vals))
 						return;
@@ -255,7 +238,7 @@ public class Window {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: The level is impossible", "Error", 0);
 						return;
 					}
-					
+
 				}
 
 
@@ -330,7 +313,7 @@ public class Window {
 		});
 		btnNewGame.setBounds(340, 40, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnNewGame);
-		
+
 	}
 
 	private void exitBtnInitialize() {
@@ -362,7 +345,7 @@ public class Window {
 
 		gameScreen.setBounds(72, 124, 336, 323);
 		frmDungeonKeep.getContentPane().add(gameScreen);
-		
+
 	}
 
 	private void ogreBoxInitialize() {
@@ -380,7 +363,7 @@ public class Window {
 		});
 		cmbOgres.setBounds(182, 43, 100, 22);
 		frmDungeonKeep.getContentPane().add(cmbOgres);
-		
+
 	}
 
 	private void frameInitialize() {
@@ -392,10 +375,10 @@ public class Window {
 		frmDungeonKeep.setBounds(100, 100, 491, 548);
 		frmDungeonKeep.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDungeonKeep.getContentPane().setLayout(null);
-		
+
 		lblMessage.setBounds(44, 473, 105, 16);
 		frmDungeonKeep.getContentPane().add(lblMessage);
-		
+
 	}
 
 	private void addKeyListner() {
@@ -433,7 +416,7 @@ public class Window {
 			}
 
 		});
-		
+
 	}
 
 	protected void statusEval() {
@@ -452,9 +435,7 @@ public class Window {
 				{
 					char[][] map_c = new char[op.map.length][op.map[0].length];
 					for(int i = 0; i < op.map.length; i++)
-					{
 						map_c[i] = op.map[i].clone();
-					}
 					game.advanceLevel(nOgres, map_c);
 				}
 				else
@@ -468,7 +449,7 @@ public class Window {
 		}
 		gameScreen.setMap(game.getMap());
 		frmDungeonKeep.repaint();
-		
+
 	}
 
 	public String printMap(char [][] map)
@@ -485,8 +466,8 @@ public class Window {
 		}		
 		return result;		
 	}
-	
-	
+
+
 	public void variableInitialize()
 	{
 		lblMessage = new JLabel("Start a new game");;
@@ -497,11 +478,10 @@ public class Window {
 		op = new Options();
 		op.setVisible(false);
 	}
-	
+
 	void mapCnt(int[] vals)
 	{
 		for(int i = 0; i < op.map.length; i++)
-		{
 			for(int j = 0; j < op.map[i].length; j++)
 			{
 				switch(op.map[i][j])
@@ -524,14 +504,11 @@ public class Window {
 					break;
 				}
 				default:
-				{
 					break;
 				}
-				}
 			}
-		}
 	}
-	
+
 	boolean errorChk(int[] vals)
 	{
 		if(vals[0] != 1)
@@ -560,7 +537,7 @@ public class Window {
 
 		return true;
 	}
-	
+
 	void readLines(BufferedReader reader) throws NumberFormatException, IOException
 	{
 		readLines1(reader);
@@ -574,13 +551,10 @@ public class Window {
 
 		char[][] m = game.getMap();
 		m = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
-
 		for(int i = 0; i < m.length; i++)
 		{
 			for (int j = 0; j < m[i].length; j++)
-			{
 				m[i][j] = reader.readLine().charAt(0);
-			}
 		}
 		game.setMap(m);
 
@@ -588,18 +562,13 @@ public class Window {
 		{
 			game.setOgre(new Ogre[nOgres]);
 			for(int i = 0; i < game.getOgre().length; i++)
-			{
 				game.getOgre()[i] = new Ogre(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), Integer.parseInt(reader.readLine()), m);
-			}
 		}
-		
 	}
 
 	private void readLines3(BufferedReader reader) throws NumberFormatException, IOException {
 		if(cmbPersonality.getSelectedItem().equals("Novice"))
-		{
 			game.setGuard(new Rookie(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
-		}
 		else if(cmbPersonality.getSelectedItem().equals("Intermediate"))
 		{
 			int x = Integer.parseInt(reader.readLine());
@@ -610,15 +579,10 @@ public class Window {
 				direction = true;
 			else
 				direction = false;
-
 			game.setGuard(new Drunken(x, y, direction, Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine())));
-
 		}
 		else
-		{
 			game.setGuard(new Suspicious(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), Boolean.parseBoolean(reader.readLine()), Float.parseFloat(reader.readLine()), Integer.parseInt(reader.readLine())));
-		}
-		
 	}
 
 	private void readLines2(BufferedReader reader) throws IOException {
@@ -635,7 +599,7 @@ public class Window {
 
 		game.setHero(Integer.parseInt(reader.readLine()), Integer.parseInt(reader.readLine()), reader.readLine().charAt(0), reader.readLine().charAt(0));
 
-		
+
 	}
 
 	private void readLines1(BufferedReader reader) throws NumberFormatException, IOException {
@@ -654,13 +618,8 @@ public class Window {
 		op.map = new char[Integer.parseInt(reader.readLine())][Integer.parseInt(reader.readLine())];
 
 		for(int i = 0; i < op.map.length; i++)
-		{
 			for (int j = 0; j < op.map[i].length; j++)
-			{
 				op.map[i][j] = reader.readLine().charAt(0);
-			}
-		}
-		
 	}
 }
 
