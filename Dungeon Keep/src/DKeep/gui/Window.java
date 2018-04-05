@@ -133,16 +133,12 @@ public class Window {
 			public void actionPerformed(ActionEvent e) {
 				frmDungeonKeep.requestFocusInWindow();
 				int returnVal = fc.showSaveDialog(frmDungeonKeep);
-
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
-
 					String file_name = file.toString();
 					if (!file_name.endsWith(".dks"))
 						file_name += ".dks";
-
 					File file_2 = new File(file_name);
-
 
 					if(file.exists() || file_2.exists())
 					{
@@ -150,17 +146,12 @@ public class Window {
 							file.delete();
 						else
 							return;
-
 					}
-
-
 					try 
 					{
 						BufferedWriter writer = new BufferedWriter(new FileWriter(file_name));
 						writeLines(writer);
-
 						writer.close();
-
 					}
 					catch (Exception e1) {
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Can't save game state.");
@@ -168,7 +159,6 @@ public class Window {
 					}
 				}
 			}
-
 		});
 		frmDungeonKeep.getContentPane().add(mntmSaveGame);
 		

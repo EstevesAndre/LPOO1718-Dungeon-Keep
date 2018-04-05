@@ -110,19 +110,16 @@ public class Options extends JDialog {
 					JOptionPane.showMessageDialog(btnAdd, "Invalid format: Y position", "Error", 0);
 					return;
 				}
-
 				if (x < 1 || x > Integer.parseInt((String)comboBox.getSelectedItem()))
 				{
 					JOptionPane.showMessageDialog(btnAdd, "Out of Bounds: X position", "Error", 0);
 					return;
 				}
-				
 				if (y < 1 || y > Integer.parseInt((String)comboBox.getSelectedItem()))
 				{
 					JOptionPane.showMessageDialog(btnAdd, "Out of Bounds: Y position", "Error", 0);
 					return;
 				}
-				
 				mapSet(x, y);
 			}
 		});
