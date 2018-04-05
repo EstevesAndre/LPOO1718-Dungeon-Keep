@@ -91,36 +91,45 @@ public class Map extends JPanel{
 				{
 					g.drawImage(ogreIMG, i*32, j*32, this);
 				}
-				else if(map[j][i] == '*')
-				{					
-					g.drawImage(clubIMG, i*32, j*32, this);
-				}
-				else if(map[j][i] == 'S')
-				{					
-					g.drawImage(doorOpenIMG, i*32, j*32, this);
-				}				
-				else if(map[j][i] == 'I')
-				{					
-					g.drawImage(doorClosedIMG, i*32, j*32, this);
-				}
-				else if(map[j][i] == 'k' || map[j][i] == '$')
-				{
-					g.drawImage(keyIMG, i*32, j*32, this);
-				}
-				else if(map[j][i] == 'l')
-				{
-					g.drawImage(leverIMG, i*32, j*32, this);
-				}
-				else if(map[j][i] == '8' || map[j][i] == 'g')
-				{
-					g.drawImage(sleepIMG, i*32, j*32, this);
-				}
 				else
 				{
-					g.setColor(Color.WHITE);
-					g.fillRect(i*32, j*32, 32, 32);
+					pc2(g, i, j);
 				}
 			}
 		}		
+	}
+
+
+	private void pc2(Graphics g, int i, int j) {
+		if(map[j][i] == '*')
+		{					
+			g.drawImage(clubIMG, i*32, j*32, this);
+		}
+		else if(map[j][i] == 'S')
+		{					
+			g.drawImage(doorOpenIMG, i*32, j*32, this);
+		}				
+		else if(map[j][i] == 'I')
+		{					
+			g.drawImage(doorClosedIMG, i*32, j*32, this);
+		}
+		else if(map[j][i] == 'k' || map[j][i] == '$')
+		{
+			g.drawImage(keyIMG, i*32, j*32, this);
+		}
+		else if(map[j][i] == 'l')
+		{
+			g.drawImage(leverIMG, i*32, j*32, this);
+		}
+		else if(map[j][i] == '8' || map[j][i] == 'g')
+		{
+			g.drawImage(sleepIMG, i*32, j*32, this);
+		}
+		else
+		{
+			g.setColor(Color.WHITE);
+			g.fillRect(i*32, j*32, 32, 32);
+		}
+		
 	}
 }

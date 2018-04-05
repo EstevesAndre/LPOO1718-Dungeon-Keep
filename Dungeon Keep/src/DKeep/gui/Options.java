@@ -123,33 +123,38 @@ public class Options extends JDialog {
 					return;
 				}
 				
-				if(comboBox_2.getSelectedItem() == "Hero")
-				{
-					map[y][x] = 'A';
-				}
-				else if(comboBox_2.getSelectedItem() == "Key")
-				{
-					map[y][x] = 'k';
-				}
-				else if(comboBox_2.getSelectedItem() == "Ogre")
-				{
-					map[y][x] = '0';
-				}
-				else if(comboBox_2.getSelectedItem() == "Wall")
-				{
-					map[y][x] = 'X';
-				}
-				else
-				{
-					map[y][x] = ' ';
-				}
-				
-				gameScreen.setMap(map);
-				gameScreen.repaint();
+				mapSet(x, y);
 			}
 		});
 		btnAdd.setBounds(20, 67, 89, 23);
 		getContentPane().add(btnAdd);
+		
+	}
+
+	protected void mapSet(int x, int y) {
+		if(comboBox_2.getSelectedItem() == "Hero")
+		{
+			map[y][x] = 'A';
+		}
+		else if(comboBox_2.getSelectedItem() == "Key")
+		{
+			map[y][x] = 'k';
+		}
+		else if(comboBox_2.getSelectedItem() == "Ogre")
+		{
+			map[y][x] = '0';
+		}
+		else if(comboBox_2.getSelectedItem() == "Wall")
+		{
+			map[y][x] = 'X';
+		}
+		else
+		{
+			map[y][x] = ' ';
+		}
+		
+		gameScreen.setMap(map);
+		gameScreen.repaint();
 		
 	}
 

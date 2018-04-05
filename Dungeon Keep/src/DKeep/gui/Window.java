@@ -198,6 +198,12 @@ public class Window {
 
 		writer.write(game.getLevel() + "\n");
 
+		writeLines2(writer);
+	}
+	
+	
+	
+	private void writeLines2(BufferedWriter writer) throws IOException {
 		game.getHero().saveGame(writer);
 		game.getGuard().saveGame(writer);
 
@@ -219,8 +225,9 @@ public class Window {
 				o.saveGame(writer);
 			}
 		}
+		
 	}
-	
+
 	private void optionsBtnInitialize() {
 		btnOptions = new JButton("Options");
 		btnOptions.addActionListener(new ActionListener() {
@@ -509,14 +516,6 @@ public class Window {
 			{
 				switch(op.map[i][j])
 				{
-				case ' ':
-				{
-					break;
-				}
-				case 'X':
-				{
-					break;
-				}
 				case 'A':
 				{
 					vals[0]++;
@@ -532,6 +531,10 @@ public class Window {
 				case 'k':
 				{
 					vals[1]++;
+					break;
+				}
+				default:
+				{
 					break;
 				}
 				}
