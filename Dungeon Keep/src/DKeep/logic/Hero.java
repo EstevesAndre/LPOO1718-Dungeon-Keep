@@ -91,29 +91,18 @@ public class Hero extends Character{
 	 */
 	public void move(char m, char[][] map)
 	{
-		switch(m)
-		{
-		case 'a':
-		{
+		if(m == 'a')
 			moveA(map);
-			break;
-		}
-		case 'd':
-		{
+		
+		else if(m == 'd')
 			moveD(map);
-			break;
-		}
-		case 'w':
-		{
+		
+		else if(m == 'w')
 			moveW(map);
-			break;
-		}
-		case 's':
-		{
+		
+		else if(m == 's')
 			moveS(map);
-			break;
-		}
-		}
+		
 		if(currentPos == 'k' && symbol == 'A')
 		{
 			symbol = 'K';

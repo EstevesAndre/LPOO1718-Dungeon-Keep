@@ -15,32 +15,32 @@ public class Game {
 	 * Represents the current Map of the game.
 	 */
 	private char[][] map;
-	
+
 	/**
 	 * Represents the Hero, main Character of the game.
 	 */
 	private Hero h;
-	
+
 	/**
 	 * Represents the Guard of the game to Level 1.
 	 */
 	private Guard g;
-	
+
 	/**
 	 * Represents the Ogres of the game, Level 2.
 	 */
 	private Ogre[] o;
-	
+
 	/**
 	 * Represents the current Level.
 	 */
 	private int level;
-	
+
 	/**
 	 * Represents the number of Ogres.
 	 */
 	private int nOgres;	
-	
+
 	/**
 	 * Creates a new Game. Standard new Game, starting Level 1 with regular objects. 
 	 */
@@ -48,7 +48,7 @@ public class Game {
 	{
 		startLevel1();
 	}
-	
+
 	/**
 	 * Creates a new Game with a given personality. 
 	 * Types of Personality: 
@@ -62,8 +62,8 @@ public class Game {
 	{
 		startLevel1(personality);
 	}
-	
-	
+
+
 	/**
 	 * Restarts the Game. Back to the standard Level 1.
 	 */
@@ -71,7 +71,7 @@ public class Game {
 	{
 		startLevel1();
 	}
-	
+
 	/**
 	 * Advance level. Current Level is Level 1 and advances to Level 2.
 	 */
@@ -79,7 +79,7 @@ public class Game {
 	{
 		startLevel2();
 	}
-	
+
 	/**
 	 * Advance level. Current Level is level 1 and advances to Level 2 with a given number of Ogres.
 	 * 
@@ -89,7 +89,7 @@ public class Game {
 	{
 		startLevel2(numberOgres);
 	}
-	
+
 	/**
 	 * Advance Level. Current Level is Level 1 and advances to Level 2 with a give number of Ogres and Map.
 	 * @param numberOgres Number of Ogres to Level 2.
@@ -99,7 +99,7 @@ public class Game {
 	{
 		startLevel2(numberOgres, map);
 	}
-	
+
 	/**
 	 * Prepare Objects of level 1. Standard.
 	 * Sets level integer variable to 1.
@@ -113,7 +113,7 @@ public class Game {
 		h = Level_1.createHero();
 		g = Level_1.createGuard();
 	}
-	
+
 	/**
 	 * Prepare Objects of Level 1. With given Guard personality.
 	 * Sets level integer variable to 1.
@@ -128,7 +128,7 @@ public class Game {
 		h = Level_1.createHero();
 		g = Level_1.createGuard(personality);
 	}
-	
+
 	/**
 	 * Prepare Objects of Level 2.
 	 * Sets level integer variable to 2.
@@ -141,20 +141,20 @@ public class Game {
 		level = 2;
 		map = Level_2.createMap();
 		h = Level_2.createHero();
-		
+
 		Random nr = new Random();
 		nOgres = nr.nextInt(4) + 1;
-		
+
 		o = new Ogre[nOgres];
-		
+
 		for(int i = 0; i < nOgres; i++)
 		{
 			o[i]  = Level_2.createOgre(map);
-			
+
 			map[ o[i].getY() ] [ o[i].getX() ] = '0';
 		}
 	}	
-	
+
 	/** 
 	 * Prepare Objects of Level 2.
 	 * Sets level integer variable to 2.
@@ -168,17 +168,17 @@ public class Game {
 		level = 2;
 		map = Level_2.createMap();
 		h = Level_2.createHero();
-		
+
 		o = new Ogre[numberOgres];
-		
+
 		for(int i = 0; i < numberOgres; i++)
 		{
 			o[i]  = Level_2.createOgre(map);
-			
+
 			map[ o[i].getY() ] [ o[i].getX() ] = '0';
 		}
 	}	
-	
+
 	/**
 	 * Prepare Objects of Level 2.
 	 * Sets level integer variable to 2.
@@ -194,21 +194,13 @@ public class Game {
 		this.map = map;
 		o = new Ogre[numberOgres];
 		int pos = 0;
-		
+
 		for(int i = 0; i < map.length; i++)
 		{
 			for(int j = 0; j < map[i].length; j++)
 			{
 				switch(map[i][j])
 				{
-				case ' ':
-				{
-					break;
-				}
-				case 'X':
-				{
-					break;
-				}
 				case 'A':
 				{
 					h = new Hero(j, i, ' ', 'A');
@@ -220,11 +212,12 @@ public class Game {
 					pos++;
 					break;
 				}
+				default: break;
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Moves the Hero in the respective map
 	 *
@@ -239,7 +232,7 @@ public class Game {
 	{
 		h.move(m, map);
 	}
-	
+
 	/**
 	 * Evaluates the game status in the exactly state.
 	 * Responsible to the movement of Ogre and his Swing on the Level 2. 
@@ -269,7 +262,7 @@ public class Game {
 		}
 		}
 	}
-	
+
 	/**
 	 * Sets the map char[][] variable with the given map parameter.
 	 * 
@@ -279,7 +272,7 @@ public class Game {
 	{
 		this.map = map;
 	}
-	
+
 	/**
 	 * Gets the current Map.
 	 * 
@@ -289,7 +282,7 @@ public class Game {
 	{
 		return map;
 	}
-	
+
 	/**
 	 * Gets the level of the current Game.
 	 * @return level variable of Game.
@@ -298,7 +291,7 @@ public class Game {
 	{
 		return level;
 	}
-	
+
 	/**
 	 * Gets the Guard of current Game.
 	 * 
@@ -308,7 +301,7 @@ public class Game {
 	{
 		return g;
 	}
-	
+
 	/**
 	 * Gets the Hero of current Game.
 	 * 
@@ -318,7 +311,7 @@ public class Game {
 	{
 		return h;
 	}
-	
+
 	/**
 	 * Gets the Ogres of current Game.
 	 * 
@@ -328,7 +321,7 @@ public class Game {
 	{
 		return o;
 	}
-	
+
 	/**
 	 * Sets Hero position and his position on map with the given parameters.
 	 * 
@@ -341,7 +334,7 @@ public class Game {
 		h.setPos(x, y);
 		map[h.getY()][h.getX()] = h.getSymbol();
 	}
-	
+
 	/**
 	 * Sets Hero position with given parameters.
 	 * 
@@ -354,9 +347,9 @@ public class Game {
 		h.setPos(x, y);
 		h.setCurrentPos(pos);
 		h.setSymbol(sym);
-		
+
 	}
-	
+
 	/**
 	 * Sets Guard personality and his attributes.
 	 * 
@@ -366,7 +359,7 @@ public class Game {
 	{
 		this.g = g;
 	}
-	
+
 	/**
 	 * Sets all Ogres with a given position, x and y.
 	 * @param x X position to set Ogres position.
@@ -389,7 +382,7 @@ public class Game {
 	 */
 	public void setOgre(Ogre[] ogres) {
 		o = ogres;
-		
+
 	}
 
 	/**
@@ -413,9 +406,11 @@ public class Game {
 		}
 		Level_2.ogreMove(map, o);
 		Level_2.swingMove(map,o);
+
 		if(keyPos[0] != 0 && keyPos[1] != 0)
 		{
 			map[keyPos[1]][keyPos[0]] = 'k';
 		}
+
 	}
 }
