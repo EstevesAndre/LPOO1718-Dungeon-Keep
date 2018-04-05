@@ -312,72 +312,23 @@ public class Window {
 				lblMessage.setText("WASD to move");
 				
 				nOgres = Integer.parseInt((String)cmbOgres.getSelectedItem());
+				
+				int[] vals = {cntHero, cntKey, cntOgre, xHero, yHero};
+				
+				
 
 				if(!op.rdbtnRandom.isSelected())
 				{
-					for(int i = 0; i < op.map.length; i++)
-					{
-						for(int j = 0; j < op.map[i].length; j++)
-						{
-							switch(op.map[i][j])
-							{
-							case ' ':
-							{
-								break;
-							}
-							case 'X':
-							{
-								break;
-							}
-							case 'A':
-							{
-								cntHero++;
-								xHero = j;
-								yHero = i;
-								break;
-							}
-							case '0':
-							{
-								cntOgre++;
-								break;
-							}
-							case 'k':
-							{
-								cntKey++;
-								break;
-							}
-							}
-						}
-					}
-					if(cntHero != 1)
-					{
-						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Hero", "Error", 0);
+					
+					mapCnt(vals);
+					if(!errorChk(vals))
 						return;
-					}
-
-					if(cntKey != 1)
-					{
-						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Key", "Error", 0);
-						return;
-					}
-
-					if(cntOgre != nOgres)
-					{
-						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Different number of Ogres than specified", "Error", 0);
-						return;
-					}
-
-					if(op.map[yHero+1][xHero] == '0' || op.map[yHero-1][xHero] == '0' || op.map[yHero][xHero+1] == '0' || op.map[yHero][xHero-1] == '0')
-					{
-						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Hero next to an Ogre", "Error", 0);
-						return;
-					}
-
-					if(!isGamePossible(op.map, xHero, yHero))
+					if(!isGamePossible(op.map, vals[3], vals[4]))
 					{
 						JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: The level is impossible", "Error", 0);
 						return;
 					}
+					
 				}
 
 
@@ -613,6 +564,73 @@ public class Window {
 
 		op = new Options();
 		op.setVisible(false);
+	}
+	
+	void mapCnt(int[] vals)
+	{
+		for(int i = 0; i < op.map.length; i++)
+		{
+			for(int j = 0; j < op.map[i].length; j++)
+			{
+				switch(op.map[i][j])
+				{
+				case ' ':
+				{
+					break;
+				}
+				case 'X':
+				{
+					break;
+				}
+				case 'A':
+				{
+					vals[0]++;
+					vals[3] = j;
+					vals[4] = i;
+					break;
+				}
+				case '0':
+				{
+					vals[2]++;
+					break;
+				}
+				case 'k':
+				{
+					vals[1]++;
+					break;
+				}
+				}
+			}
+		}
+	}
+	
+	boolean errorChk(int[] vals)
+	{
+		if(vals[0] != 1)
+		{
+			JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Hero", "Error", 0);
+			return false;
+		}
+
+		if(vals[1] != 1)
+		{
+			JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Not exacly one Key", "Error", 0);
+			return false;
+		}
+
+		if(vals[2] != nOgres)
+		{
+			JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Different number of Ogres than specified", "Error", 0);
+			return false;
+		}
+
+		if(op.map[vals[4]+1][vals[3]] == '0' || op.map[vals[4]-1][vals[3]] == '0' || op.map[vals[4]][vals[3]+1] == '0' || op.map[vals[4]][vals[3]-1] == '0')
+		{
+			JOptionPane.showMessageDialog(frmDungeonKeep, "Illegal Map: Hero next to an Ogre", "Error", 0);
+			return false;
+		}
+
+		return true;
 	}
 }
 
