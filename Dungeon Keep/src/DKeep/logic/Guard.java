@@ -56,25 +56,19 @@ public class Guard extends Character{
 	public void movePart2(char [][]map)
 	{
 		if(yPos == 6)
-		{
 			xPos++;
-		}
-		else if(xPos == 1)
-		{
+		
+		else if(xPos == 1)		
 			yPos++;
-		}
-		else if(yPos == 5)
-		{
+		
+		else if(yPos == 5)		
 			xPos--;
-		}
-		else if(xPos == 7)
-		{
-			yPos++;
-		}
-		else
-		{
-			xPos++;
-		}
+		
+		else if(xPos == 7)		
+			yPos++;		
+		
+		else		
+			xPos++;		
 	}
 	
 	
