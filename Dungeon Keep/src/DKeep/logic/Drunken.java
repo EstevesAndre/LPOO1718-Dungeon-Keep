@@ -120,7 +120,10 @@ public class Drunken extends Guard{
 		}
 		else
 		{
-			moveWithSleepCount(map);
+			sleepCount--;
+			if(sleepCount == 0){
+				moveWithSleepCount(map);
+			}
 		}
 
 	}
@@ -134,26 +137,21 @@ public class Drunken extends Guard{
 	 */
 	public void moveWithSleepCount (char[][] map)
 	{
-		sleepCount--;
-		if(sleepCount == 0)
-		{
-			Random nr = new Random();
-			if(nr.nextBoolean()) {
+		Random nr = new Random();
+		if(nr.nextBoolean()) {
+			if(direction)
+				indice--;
+			else
+				indice ++;
+			if(indice == -1)
+				indice = path.length - 1;
+			else if(indice == path.length)
+				indice = 0;
 
-				if(direction)
-					indice--;
-				else
-					indice ++;
+			direction = !direction;
+		}				
+		symbol = 'G';
 
-				if(indice == -1)
-					indice = path.length - 1;
-				else if(indice == path.length)
-					indice = 0;
-
-				direction = !direction;
-			}				
-			symbol = 'G';
-		}
 	}
 
 	/**

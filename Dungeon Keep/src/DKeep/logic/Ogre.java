@@ -19,19 +19,19 @@ public class Ogre extends Character{
 	 * Represents the x position of the Swing.
 	 */
 	private int xSwingPos;
-	
+
 	/**
 	 * Represents the y position of the Swing.
 	 */
 	private int ySwingPos;
-	
+
 	/**
 	 * Symbol of the Ogre.
 	 * Standard symbol is '0'.
 	 * If Ogre is sleeping symbol is '8'.
 	 */
 	private char symbol; 
-	
+
 	/**
 	 * Number of movements of Hero can do without Ogre move.
 	 * Starts at 0.
@@ -41,7 +41,7 @@ public class Ogre extends Character{
 	 * If reaches 0, Ogre wake up and move normally.
 	 */
 	private int sleepCount;
-	
+
 	/**
 	 * Represents the map of Level.
 	 */
@@ -62,7 +62,7 @@ public class Ogre extends Character{
 		sleepCount = 0;
 		this.m = m;
 	}
-	
+
 	/**
 	 * Creates a new Ogre with the given position, x and y, xSwing, ySwing, symbol, sleepCount and map.
 	 * @param x X position of Ogre.
@@ -92,7 +92,7 @@ public class Ogre extends Character{
 	{
 		return symbol;
 	}
-	
+
 	/**
 	 * Gets Ogre's sleepCount.
 	 * 
@@ -102,7 +102,7 @@ public class Ogre extends Character{
 	{
 		return sleepCount;
 	}
-	
+
 	/**
 	 * Moves the Ogre in the respective given map.
 	 * 
@@ -114,35 +114,38 @@ public class Ogre extends Character{
 	{
 		if(sleepCount == 0)
 		{
-			if(symbol == '$')
-			{
-				map[yPos][xPos] = 'k';
-				symbol = '0';
-			}
-			else
-			{
-				map[yPos][xPos] = ' ';
-			}
-
-			changePos();
-
-			if(map[yPos][xPos] == 'k')
-			{
-				symbol = '$';
-			}
-
-			map[yPos][xPos] = symbol;			
-
+			moveWithSleepCount0(map);
 		}
 		else
 		{
 			sleepCount--;
-
 			if(sleepCount == 0)
-			{
 				symbol = '0';
-			}
 		}
+	}
+	
+	/**
+	 * Moves the Ogre in the respective given map when sleepCount is 0.
+	 * 
+	 * Respecting the logic of the game.
+	 * 
+	 * @param map char[][] Map to be set.
+	 */
+	public void moveWithSleepCount0 (char [][] map)
+	{
+		if(symbol == '$'){
+			map[yPos][xPos] = 'k';
+			symbol = '0';
+		}
+		else			
+			map[yPos][xPos] = ' ';
+
+		changePos();
+
+		if(map[yPos][xPos] == 'k')
+			symbol = '$';
+
+		map[yPos][xPos] = symbol;	
 	}
 
 	/**
@@ -154,28 +157,17 @@ public class Ogre extends Character{
 	public void swing( char[][] map)
 	{
 		if(map[ySwingPos][xSwingPos] == '$')
-		{
 			map[ySwingPos][xSwingPos] = 'k';
-		}
-		else if(map[ySwingPos][xSwingPos] == '0')
-		{
 
-		}
-		else
-		{
+		else if(map[ySwingPos][xSwingPos] != '0')
 			map[ySwingPos][xSwingPos] = ' ';
-		}
-		
+
 		changeSwingPos();
 
-		if(map[ySwingPos][xSwingPos] == 'k')
-		{
-			map[ySwingPos][xSwingPos] = '$';
-		}
-		else
-		{
+		if(map[ySwingPos][xSwingPos] == 'k')		
+			map[ySwingPos][xSwingPos] = '$';		
+		else		
 			map[ySwingPos][xSwingPos] = '*';
-		}
 	}
 
 	/**
@@ -191,7 +183,7 @@ public class Ogre extends Character{
 		map[yPos][xPos] = symbol;
 		sleepCount = 2;
 	}
-	
+
 	/**
 	 * Saves the information of the Guard.
 	 * 
@@ -209,9 +201,9 @@ public class Ogre extends Character{
 		} catch (IOException e) {
 			throw new IOException();
 		}
-		
+
 	}
-	
+
 	/**
 	 * Changes position of guard randomly
 	 * Verifies for possible infinite loops
@@ -222,7 +214,7 @@ public class Ogre extends Character{
 		Random nr = new Random();
 		boolean muda_posicao = true;
 		boolean left = false,right = false,down = false,up = false;
-		
+
 		do {
 			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
 			switch(num)
@@ -262,8 +254,8 @@ public class Ogre extends Character{
 			}
 		}while(muda_posicao && !(up && down && left && right));
 	}
-	
-	
+
+
 	/**
 	 * Changes swing position randomly
 	 * Verifies for possible infinite loops
@@ -273,10 +265,10 @@ public class Ogre extends Character{
 	{
 		Random nr = new Random();
 		boolean muda_posicao = true;
-		
+
 		boolean left = false,right = false,down = false,up = false;
-		
-		
+
+
 		do {
 			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
 			switch(num)

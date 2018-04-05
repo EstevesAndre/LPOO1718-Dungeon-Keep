@@ -248,18 +248,13 @@ public class Game {
 		switch(level)
 		{
 		case 1:
-		{
 			return Level_1.evalStatus(map, h, g);
-		}
+		
 		case 2:
-		{
 			lvl2Check();
 			return Level_2.evalStatus(map, h, o);
-		}
 		default:
-		{
 			return 3;
-		}
 		}
 	}
 	

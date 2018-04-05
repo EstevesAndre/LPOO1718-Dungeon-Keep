@@ -35,18 +35,14 @@ public class Guard extends Character{
 	{
 		map[yPos][xPos] = ' ';
 
-		if( yPos == 1 && xPos == 7)
-		{
+		if( yPos == 1 && xPos == 7)		
 			yPos++;			
-		}
-		else if(xPos == 8 && yPos <= 6 && yPos > 1)
-		{
+		
+		else if(xPos == 8 && yPos <= 6 && yPos > 1)		
 			yPos--;
-		}
-		else if(yPos == 1)
-		{
+		
+		else if(yPos == 1)		
 			xPos--;
-		}
 		else 
 			movePart2(map);
 
