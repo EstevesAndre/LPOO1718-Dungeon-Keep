@@ -47,7 +47,14 @@ public class Guard extends Character{
 		{
 			xPos--;
 		}
-		else if(yPos == 6)
+		movePart2(map);
+
+		map[yPos][xPos] = 'G';
+	}
+
+	public void movePart2(char [][]map)
+	{
+		if(yPos == 6)
 		{
 			xPos++;
 		}
@@ -67,10 +74,9 @@ public class Guard extends Character{
 		{
 			xPos++;
 		}
-
-		map[yPos][xPos] = 'G';
 	}
-
+	
+	
 	/**
 	 * Auxiliary function to some Guards' movement
 	 * Respecting some conditions (his path).

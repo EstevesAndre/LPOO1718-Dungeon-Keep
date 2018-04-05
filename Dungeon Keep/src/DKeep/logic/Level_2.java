@@ -76,14 +76,10 @@ public class Level_2 {
 			y = nr.nextInt(7) + 1;
 
 			if((y >= 5 && x <= 3) || (x == 7 && y == 1))
-			{
 				valid = false;
-			}
-
 		}while(!valid);
 
-		Ogre o = new Ogre(x, y, map);
-		return o;
+		return new Ogre(x, y, map);		
 	}
 
 	/**
