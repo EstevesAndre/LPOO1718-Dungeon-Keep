@@ -157,49 +157,7 @@ public class Window {
 					try 
 					{
 						BufferedWriter writer = new BufferedWriter(new FileWriter(file_name));
-						writer.write(nOgres + "\n");
-						writer.write(playing + "\n");
-						writer.write(custom + "\n");
-						writer.write(op.map.length + "\n");
-						writer.write(op.map[0].length + "\n");
-
-
-						for(char[] line : op.map)
-						{
-							for (char c : line)
-							{
-								writer.write(c + "\n");
-							}
-						}
-
-						writer.write(op.comboBox.getSelectedItem() + "\n");
-						writer.write(op.comboBox_1.getSelectedItem() + "\n");
-
-						writer.write(cmbPersonality.getSelectedItem() + "\n");
-
-						writer.write(game.getLevel() + "\n");
-
-						game.getHero().saveGame(writer);
-						game.getGuard().saveGame(writer);
-
-						writer.write(game.getMap().length + "\n");
-						writer.write(game.getMap().length + "\n");
-
-						for(char[] line : game.getMap())
-						{
-							for (char c : line)
-							{
-								writer.write(c + "\n");
-							}
-						}
-
-						if (game.getLevel() == 2)
-						{
-							for(Ogre o : game.getOgre())
-							{
-								o.saveGame(writer);
-							}
-						}
+						writeLines(writer);
 
 						writer.close();
 
@@ -210,11 +168,59 @@ public class Window {
 					}
 				}
 			}
+
 		});
 		frmDungeonKeep.getContentPane().add(mntmSaveGame);
 		
 	}
 
+	void writeLines(BufferedWriter writer) throws IOException
+	{
+		writer.write(nOgres + "\n");
+		writer.write(playing + "\n");
+		writer.write(custom + "\n");
+		writer.write(op.map.length + "\n");
+		writer.write(op.map[0].length + "\n");
+
+
+		for(char[] line : op.map)
+		{
+			for (char c : line)
+			{
+				writer.write(c + "\n");
+			}
+		}
+
+		writer.write(op.comboBox.getSelectedItem() + "\n");
+		writer.write(op.comboBox_1.getSelectedItem() + "\n");
+
+		writer.write(cmbPersonality.getSelectedItem() + "\n");
+
+		writer.write(game.getLevel() + "\n");
+
+		game.getHero().saveGame(writer);
+		game.getGuard().saveGame(writer);
+
+		writer.write(game.getMap().length + "\n");
+		writer.write(game.getMap().length + "\n");
+
+		for(char[] line : game.getMap())
+		{
+			for (char c : line)
+			{
+				writer.write(c + "\n");
+			}
+		}
+
+		if (game.getLevel() == 2)
+		{
+			for(Ogre o : game.getOgre())
+			{
+				o.saveGame(writer);
+			}
+		}
+	}
+	
 	private void optionsBtnInitialize() {
 		btnOptions = new JButton("Options");
 		btnOptions.addActionListener(new ActionListener() {
