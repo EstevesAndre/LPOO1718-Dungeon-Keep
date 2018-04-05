@@ -394,7 +394,61 @@ public class Window {
 				frmDungeonKeep.requestFocusInWindow();
 			}
 
-			
+			private boolean isGamePossible(char[][] map, int xHero, int yHero) {
+
+				boolean[][] visited = new boolean[map.length][map[0].length];
+				int[] xyKey = {0,0};
+				int[] xyDoor = {0,0};
+
+				return findGoal(map,visited,xHero,yHero,xyKey,xyDoor);
+			}
+
+			private boolean findGoal(char[][] map, boolean[][] visited, int x, int y, int[] xyKey, int[] xyDoor) {
+
+				visited[y][x] = true;
+
+				if(map[y][x] == 'k')
+				{					
+					xyKey[0] = x;
+					xyKey[1] = y;
+				}
+				if(map[y][x] == 'I')
+				{
+					xyDoor[0] = x;
+					xyDoor[1] = y;										
+				}
+
+				if(visited[xyKey[1]][xyKey[0]] && visited[xyDoor[1]][xyDoor[0]])
+				{
+					return true;
+				}
+
+				if(y-1 >= 0 && map[y-1][x] != 'X' && !visited[y-1][x])
+				{
+					if(findGoal(map,visited,x,y-1,xyKey,xyDoor))
+						return true;
+				}
+
+				if(map[y+1][x] != 'X' && !visited[y+1][x])
+				{
+					if(findGoal(map,visited,x,y+1,xyKey,xyDoor))
+						return true;
+				}
+
+				if(map[y][x+1] != 'X' && !visited[y][x+1])
+				{
+					if(findGoal(map,visited,x+1,y,xyKey,xyDoor))
+						return true;
+				}
+
+				if(x-1 >= 0 && map[y][x-1] != 'X' && !visited[y][x-1])
+				{
+					if(findGoal(map,visited,x-1,y,xyKey,xyDoor))
+						return true;
+				}
+
+				return false;
+			}
 		});
 		btnNewGame.setBounds(340, 40, 97, 25);
 		frmDungeonKeep.getContentPane().add(btnNewGame);
@@ -559,62 +613,6 @@ public class Window {
 
 		op = new Options();
 		op.setVisible(false);
-	}
-	
-	private boolean isGamePossible(char[][] map, int xHero, int yHero) {
-
-		boolean[][] visited = new boolean[map.length][map[0].length];
-		int[] xyKey = {0,0};
-		int[] xyDoor = {0,0};
-
-		return findGoal(map,visited,xHero,yHero,xyKey,xyDoor);
-	}
-
-	private boolean findGoal(char[][] map, boolean[][] visited, int x, int y, int[] xyKey, int[] xyDoor) {
-
-		visited[y][x] = true;
-
-		if(map[y][x] == 'k')
-		{					
-			xyKey[0] = x;
-			xyKey[1] = y;
-		}
-		if(map[y][x] == 'I')
-		{
-			xyDoor[0] = x;
-			xyDoor[1] = y;										
-		}
-
-		if(visited[xyKey[1]][xyKey[0]] && visited[xyDoor[1]][xyDoor[0]])
-		{
-			return true;
-		}
-
-		if(y-1 >= 0 && map[y-1][x] != 'X' && !visited[y-1][x])
-		{
-			if(findGoal(map,visited,x,y-1,xyKey,xyDoor))
-				return true;
-		}
-
-		if(map[y+1][x] != 'X' && !visited[y+1][x])
-		{
-			if(findGoal(map,visited,x,y+1,xyKey,xyDoor))
-				return true;
-		}
-
-		if(map[y][x+1] != 'X' && !visited[y][x+1])
-		{
-			if(findGoal(map,visited,x+1,y,xyKey,xyDoor))
-				return true;
-		}
-
-		if(x-1 >= 0 && map[y][x-1] != 'X' && !visited[y][x-1])
-		{
-			if(findGoal(map,visited,x-1,y,xyKey,xyDoor))
-				return true;
-		}
-
-		return false;
 	}
 }
 
