@@ -207,109 +207,161 @@ public class Ogre extends Character{
 	/**
 	 * Changes position of guard randomly
 	 * Verifies for possible infinite loops
-	 *  
 	 */
-	void changePos()
-	{
+	void changePos() {
 		Random nr = new Random();
-		boolean muda_posicao = true;
-		boolean left = false,right = false,down = false,up = false;
-
+		boolean vals[] = {true,false,false,false,false};
 		do {
 			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
-			switch(num)
-			{
-			case 0:
-				if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
-				{
-					xPos++;
-					muda_posicao = false;
-				}
-				right = true;
+			switch(num){
+			case 0:	changePosRight(vals);
 				break;
-			case 1:
-				if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
-				{
-					xPos--;
-					muda_posicao = false;
-				}
-				left = true;
+			case 1:	changePosLeft(vals);
 				break;
-			case 2:
-				if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
-				{
-					yPos--;
-					muda_posicao = false;
-				}
-				up = true;
+			case 2: changePosUp(vals);
 				break;
-			case 3:
-				if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
-				{
-					yPos++;
-					muda_posicao = false;
-				}
-				down = true;
+			case 3: changePosDown(vals);
 				break;
 			}
-		}while(muda_posicao && !(up && down && left && right));
+		}while(vals[0] && !(vals[1] && vals[2] && vals[3] && vals[4]));
 	}
 
+	/**
+	 * Changes position of guard to Right if possible
+	 * Verifies for possible infinite loops
+	 */
+	void changePosRight(boolean[] vals)
+	{
+		if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
+		{
+			xPos++;
+			vals[0] = false;
+		}
+		vals[1] = true;
+	}
+	
+	/**
+	 * Changes position of guard to Left if possible
+	 * Verifies for possible infinite loops
+	 */
+	void changePosLeft(boolean[] vals)
+	{
+		if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
+		{
+			xPos--;
+			vals[0] = false;
+		}
+		vals[2] = true;
+	}
+	
+	/**
+	 * Changes position of guard up if possible
+	 * Verifies for possible infinite loops
+	 */
+	void changePosUp(boolean[] vals)
+	{
+		if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
+		{
+			yPos--;
+			vals[0] = false;
+		}
+		vals[3] = true;
+	}
+	
+	/**
+	 * Changes position of guard down if possible
+	 * Verifies for possible infinite loops
+	 */
+	void changePosDown(boolean[] vals)
+	{
+		if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
+		{
+			yPos++;
+			vals[0] = false;
+		}
+		vals[4] = true;
+	}
 
 	/**
 	 * Changes swing position randomly
-	 * Verifies for possible infinite loops
-	 *  
+	 * Verifies for possible infinite loops  
 	 */
-	void changeSwingPos()
-	{
+	void changeSwingPos() {
 		Random nr = new Random();
-		boolean muda_posicao = true;
-
-		boolean left = false,right = false,down = false,up = false;
-
-
+		boolean vals[] = {true,false,false,false,false};
 		do {
 			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
 			switch(num)
 			{
-			case 0:
-				if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
-				{
-					ySwingPos = yPos;
-					xSwingPos = xPos + 1;
-					muda_posicao = false;
-				}
-				right = true;
+			case 0:	changeSwingPosRight(vals);
 				break;
-			case 1:
-				if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
-				{
-					ySwingPos = yPos;
-					xSwingPos = xPos - 1;
-					muda_posicao = false;
-				}
-				left = true;
+			case 1:	changeSwingPosLeft(vals);
 				break;
-			case 2:
-				if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
-				{
-					ySwingPos = yPos - 1;
-					xSwingPos = xPos;
-					muda_posicao = false;
-				}
-				up = true;
+			case 2: changeSwingPosUp(vals);
 				break;
-			case 3:
-				if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
-				{
-					ySwingPos = yPos + 1;
-					xSwingPos = xPos;
-					muda_posicao = false;					
-				}
-				down = true;
+			case 3:	changeSwingPosDown(vals);
 				break;
 			}
-		}while(muda_posicao && !(up && down && left && right));
+		}while(vals[0] && !(vals[1] && vals[2] && vals[3] && vals[4]));
+	}
+	
+	/**
+	 * Changes swing position to right if possible
+	 * Verifies for possible infinite loops  
+	 */
+	void changeSwingPosRight(boolean[] vals)
+	{
+		if(m[yPos][xPos+1] != 'X' && m[yPos][xPos+1] != 'I')
+		{
+			ySwingPos = yPos;
+			xSwingPos = xPos + 1;
+			vals[0] = false;
+		}
+		vals[1] = true;
+	}
+	
+	/**
+	 * Changes swing position to left if possible
+	 * Verifies for possible infinite loops  
+	 */
+	void changeSwingPosLeft(boolean[] vals)
+	{
+		if(m[yPos][xPos-1] != 'X' && m[yPos][xPos-1] != 'I')
+		{
+			ySwingPos = yPos;
+			xSwingPos = xPos - 1;
+			vals[0] = false;
+		}
+		vals[2] = true;
+	}
+	
+	/**
+	 * Changes swing position up if possible
+	 * Verifies for possible infinite loops  
+	 */
+	void changeSwingPosUp(boolean[] vals)
+	{
+		if(m[yPos-1][xPos] != 'X' && m[yPos-1][xPos] != 'I')
+		{
+			ySwingPos = yPos - 1;
+			xSwingPos = xPos;
+			vals[0] = false;
+		}
+		vals[3] = true;
+	}
+	
+	/**
+	 * Changes swing position down if possible
+	 * Verifies for possible infinite loops  
+	 */
+	void changeSwingPosDown(boolean[] vals)
+	{
+		if(m[yPos+1][xPos] != 'X' && m[yPos+1][xPos] != 'I')
+		{
+			ySwingPos = yPos + 1;
+			xSwingPos = xPos;
+			vals[0] = false;					
+		}
+		vals[4] = true;
 	}
 }
