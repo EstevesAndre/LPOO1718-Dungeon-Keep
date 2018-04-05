@@ -183,16 +183,13 @@ public class Drunken extends Guard{
 	{
 		Random nr = new Random();
 		float value = nr.nextFloat() * modifier;
-
-		if(value >= 0.8)
-		{
+		if(value >= 0.8){
 			symbol = 'g';
 			sleepCount = nr.nextInt(3) + 2;
 			modifier = (float)1/3;
 			return true;
 		}
-		else
-		{
+		else{
 			modifier += (float)1/3;
 			return false;
 		}

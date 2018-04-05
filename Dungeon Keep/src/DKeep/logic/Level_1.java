@@ -125,19 +125,15 @@ public class Level_1 {
 	 * @return Guard of level 1.
 	 */
 	public static Guard createGuard(String personality) {
-		// TODO Auto-generated method stub
-		if(personality.equals("Novice"))
-		{
+		if(personality.equals("Novice")){
 			Guard g = new Rookie(8, 1);
 			return g;
 		}
-		else if(personality.equals("Advanced"))
-		{
+		else if(personality.equals("Advanced"))	{
 			Guard g = new Suspicious(8, 1);
 			return g;
 		}
-		else
-		{
+		else{
 			Guard g = new Drunken(8, 1);
 			return g;
 		}

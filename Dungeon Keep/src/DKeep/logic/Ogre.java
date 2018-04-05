@@ -214,14 +214,10 @@ public class Ogre extends Character{
 		do {
 			int num = nr.nextInt(4); // 0(r), 1(l), 2(u) and 3(d)
 			switch(num){
-			case 0:	changePosRight(vals);
-				break;
-			case 1:	changePosLeft(vals);
-				break;
-			case 2: changePosUp(vals);
-				break;
-			case 3: changePosDown(vals);
-				break;
+			case 0:	changePosRight(vals);break;
+			case 1:	changePosLeft(vals);break;
+			case 2: changePosUp(vals);break;
+			case 3: changePosDown(vals);break;
 			}
 		}while(vals[0] && !(vals[1] && vals[2] && vals[3] && vals[4]));
 	}
