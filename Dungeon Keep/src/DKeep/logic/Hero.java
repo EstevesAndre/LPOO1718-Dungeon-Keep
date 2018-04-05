@@ -98,7 +98,7 @@ public class Hero extends Character{
 		else if(m == 'w')
 			moveW(map);		
 		else if(m == 's')
-			moveS(map);		
+			moveS(map);
 		
 		if(currentPos == 'k' && symbol == 'A'){
 			symbol = 'K';
