@@ -14,7 +14,7 @@ import java.io.IOException;
  * @since 2018-03-31
  */
 public class Guard extends Character{
-	
+
 	/**
 	 * Creates a new Guard with a given position, x and y.
 	 * @param x X position of the Guard.
@@ -24,7 +24,7 @@ public class Guard extends Character{
 	{
 		super(x, y);
 	}
-	
+
 	/**
 	 * Moves the Guard in the respective given map.
 	 * Respecting some conditions (his path).
@@ -34,7 +34,7 @@ public class Guard extends Character{
 	public void move(char[][] map) 
 	{
 		map[yPos][xPos] = ' ';
-		
+
 		if( yPos == 1 && xPos == 7)
 		{
 			yPos++;			
@@ -67,15 +67,15 @@ public class Guard extends Character{
 		{
 			xPos++;
 		}
-		
+
 		map[yPos][xPos] = 'G';
 	}
-	
+
 	/**
 	 * Auxiliary function to some Guards' movement
 	 * Respecting some conditions (his path).
 	 * 
-	 * @param int indice current position in path
+	 * @param int index current position in path
 	 * @param map char[][] path Guard's movement path.
 	 * @param boolean direction current Guard's direction in path
 	 */
@@ -83,15 +83,32 @@ public class Guard extends Character{
 	{
 		int num;
 
-		if(direction)
-		{
-			num = 1;
-		}
+		if(direction)		
+			num = 1;		
 		else
-		{
 			num = -1;
-		}
 
+		positionChangeSwitch(indice,path,num);
+		indice += num;
+
+		if(indice == -1)
+			indice = path.length - 1;
+		else if(indice == path.length)	
+			indice = 0;
+
+		return indice;
+	}
+
+	/**
+	 * Auxiliary function to positionChange function
+	 * Respecting some conditions (his path).
+	 * 
+	 * @param int index current position in path
+	 * @param map char[][] path Guard's movement path.
+	 * @param num direction number, can be 1 or -1.
+	 */
+	public void positionChangeSwitch(int indice, char[] path, int num)
+	{
 		switch(path[indice] )
 		{
 		case 'd':
@@ -116,19 +133,6 @@ public class Guard extends Character{
 		}
 		default: break;
 		}
-
-		indice += num;
-
-		if(indice == -1)
-		{
-			indice = path.length - 1;
-		}
-		else if(indice == path.length)
-		{
-			indice = 0;
-		}
-		
-		return indice;
 	}
 
 	/**
@@ -137,7 +141,7 @@ public class Guard extends Character{
 	 * @param writer BufferedWriter writer to be set with the respective info.
 	 * 			xPos and yPos.
 	 * @throws IOException Throws exception if fails on writing. 
-	*/
+	 */
 	public void saveGame(BufferedWriter writer) throws IOException {
 		try {
 			writer.write(this.xPos + "\n");
@@ -145,7 +149,7 @@ public class Guard extends Character{
 		} catch (IOException e) {
 			throw new IOException();
 		}
-		
+
 	}
 
 }
