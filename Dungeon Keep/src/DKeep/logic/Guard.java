@@ -47,7 +47,8 @@ public class Guard extends Character{
 		{
 			xPos--;
 		}
-		movePart2(map);
+		else 
+			movePart2(map);
 
 		map[yPos][xPos] = 'G';
 	}
