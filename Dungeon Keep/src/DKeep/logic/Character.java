@@ -24,8 +24,7 @@ public class Character {
 	protected int yPos;
 
 	/**
-	 * Creates a new Character with the given position, x and y.
-	 * 
+	 * Creates a new Character with the given position, x and y. 
 	 * @param x X position.
 	 * @param y Y position.
 	 */
